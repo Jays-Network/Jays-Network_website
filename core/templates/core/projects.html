@@ -1,0 +1,47 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container" style="padding-top: 100px;">
+    
+    <div class="profile-header scroll-visible" style="opacity: 1; transform: none; margin-top: 2rem;">
+        <h1>ACTIVE PROJECTS</h1>
+        <div class="role">CLASSIFIED DEVELOPMENT</div>
+    </div>
+
+    <div id="projects-grid" class="scroll-hidden" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; width: 100%;">
+        
+        <div class="browser-card" style="min-height: 350px;">
+            <div class="browser-header">
+                <div class="window-controls"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                <div class="url-bar">NexusComs.exe</div>
+            </div>
+            <div class="browser-body" style="padding: 1.5rem;">
+                <h3 class="stack-title">NexusComs</h3>
+                <p class="bio-text">Secure communication platform with end-to-end encryption. Built for high-stakes environments.</p>
+                <div class="icons-row" style="font-size: 1.5rem; margin-bottom: 10px;">
+                    <i class="devicon-react-original colored"></i>
+                    <i class="devicon-nodejs-plain colored"></i>
+                </div>
+                <a href="#" class="social-btn" style="width: 100%; border-radius: 4px; margin-top: 10px;">VIEW SOURCE</a>
+            </div>
+        </div>
+
+        <div class="browser-card" style="min-height: 350px;">
+            <div class="browser-header">
+                <div class="window-controls"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                <div class="url-bar">HomeLab_v2.sh</div>
+            </div>
+            <div class="browser-body" style="padding: 1.5rem;">
+                <h3 class="stack-title">Home Lab Cluster</h3>
+                <p class="bio-text">Proxmox-based HA cluster running custom automation scripts and network monitoring.</p>
+                <div class="icons-row" style="font-size: 1.5rem; margin-bottom: 10px;">
+                    <i class="devicon-linux-plain colored"></i>
+                    <i class="devicon-docker-plain colored"></i>
+                </div>
+                <a href="#" class="social-btn" style="width: 100%; border-radius: 4px; margin-top: 10px;">SYSTEM STATUS</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
