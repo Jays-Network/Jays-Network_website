@@ -41,7 +41,7 @@
             background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg'); 
             background-size: cover;
             background-position: center;
-            opacity: 0.2; /* Increased opacity so you can see it */
+            opacity: 0.2; 
             filter: invert(1) brightness(0.7);
             z-index: -3;
         }
@@ -93,8 +93,8 @@
 
         /* Browser & Terminal Cards (Transparent) */
         .browser-card, .terminal-card {
-            background: rgba(10, 10, 15, 0.6); /* Transparent Glass */
-            backdrop-filter: blur(8px); /* Low Blur to see map */
+            background: rgba(10, 10, 15, 0.6); 
+            backdrop-filter: blur(8px); 
             border: 1px solid rgba(0, 242, 255, 0.2);
             border-radius: 12px; overflow: hidden; box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
             min-height: 450px; display: flex; flex-direction: column; text-align: left; width: 100%;
@@ -254,17 +254,12 @@
             }
         }, 30);
 
-        // --- 2. RESTORED: LIVE NETWORK CANVAS SCRIPT ---
+        // --- 2. UPDATED: LIVE 2-WAY NETWORK CANVAS SCRIPT ---
         const canvas = document.getElementById('network-canvas');
         const ctx = canvas.getContext('2d');
-        
         let width, height;
-        const resizeCanvas = () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        };
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        const resizeCanvas = () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; };
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
 
         const origin = { x: 0.55, y: 0.65 }; // SA
         const targets = [
@@ -278,7 +273,19 @@
                 this.reset();
             }
             reset() {
-                this.target = targets[Math.floor(Math.random() * targets.length)];
+                const randomNode = targets[Math.floor(Math.random() * targets.length)];
+                
+                // 50/50 Chance for Inbound vs Outbound
+                const isOutbound = Math.random() > 0.5;
+
+                if (isOutbound) {
+                    this.start = origin;
+                    this.end = randomNode;
+                } else {
+                    this.start = randomNode;
+                    this.end = origin;
+                }
+
                 this.progress = 0;
                 this.speed = 0.005 + Math.random() * 0.01;
                 this.color = Math.random() > 0.5 ? '#00f2ff' : '#7000ff';
@@ -288,13 +295,13 @@
                 if (this.progress >= 1) this.reset();
             }
             draw() {
-                const startX = width * origin.x;
-                const startY = height * origin.y;
-                const endX = width * this.target.x;
-                const endY = height * this.target.y;
+                const startX = width * this.start.x;
+                const startY = height * this.start.y;
+                const endX = width * this.end.x;
+                const endY = height * this.end.y;
 
                 const cpX = (startX + endX) / 2;
-                const cpY = startY - 100; // Curve arch height
+                const cpY = startY - 100; // Curve arch
                 const t = this.progress;
 
                 // Position
@@ -319,7 +326,7 @@
                 ctx.lineWidth = 1;
                 ctx.stroke();
 
-                // Impact Ripple
+                // Impact Ripple (At destination)
                 if (this.progress > 0.95) {
                     ctx.beginPath();
                     ctx.arc(endX, endY, (this.progress - 0.95) * 100, 0, Math.PI * 2);
@@ -329,18 +336,15 @@
             }
         }
 
-        const packets = Array.from({ length: 15 }, () => new Packet());
+        const packets = Array.from({ length: 20 }, () => new Packet()); // Increased Packet Count
 
         function animateNetwork() {
             ctx.clearRect(0, 0, width, height);
             
-            // Draw Origin
+            // Draw Origin Pulse (SA)
             const oX = width * origin.x;
             const oY = height * origin.y;
-            ctx.beginPath();
-            ctx.arc(oX, oY, 5, 0, Math.PI * 2);
-            ctx.fillStyle = '#00f2ff';
-            ctx.fill();
+            ctx.beginPath(); ctx.arc(oX, oY, 5, 0, Math.PI * 2); ctx.fillStyle = '#00f2ff'; ctx.fill();
 
             packets.forEach(p => {
                 p.update();
@@ -359,10 +363,7 @@
                         entry.target.classList.add('scroll-visible');
                         if(entry.target.id === 'browser-window' && !entry.target.dataset.triggered) {
                             entry.target.dataset.triggered = "true";
-                            setTimeout(() => {
-                                document.getElementById('browser-loader').style.display = 'none';
-                                document.getElementById('browser-content-container').classList.add('fade-in-content');
-                            }, 2500);
+                            setTimeout(() => { document.getElementById('browser-loader').style.display = 'none'; document.getElementById('browser-content-container').classList.add('fade-in-content'); }, 2500);
                         }
                         if(entry.target.id === 'terminal-window' && !entry.target.dataset.triggered) {
                             entry.target.dataset.triggered = "true";
