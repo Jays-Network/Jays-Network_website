@@ -37,7 +37,6 @@
         /* --- 1. NETWORK MAP BACKGROUND --- */
         .global-map-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            /* High-res dark map */
             background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg'); 
             background-size: cover;
             background-position: center;
@@ -91,15 +90,21 @@
         .scroll-hidden { opacity: 0; transform: translateY(100px) scale(0.95); filter: blur(10px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .scroll-visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 
-        /* Browser & Terminal Cards */
+        /* --- BROWSER & TERMINAL CARDS (UPDATED TRANSPARENCY) --- */
         .browser-card, .terminal-card {
-            background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(0, 242, 255, 0.15);
+            /* Increased transparency (0.85 -> 0.6) and reduced blur (20px -> 10px) */
+            background: rgba(10, 10, 15, 0.6); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(0, 242, 255, 0.2);
             border-radius: 12px; overflow: hidden; box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
             min-height: 450px; display: flex; flex-direction: column; text-align: left; width: 100%;
         }
         
-        /* Browser Styles */
-        .browser-header { background: rgba(30, 30, 35, 0.9); padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid #444; }
+        /* Browser Styles (Updated Header Transparency) */
+        .browser-header { 
+            background: rgba(30, 30, 35, 0.7); /* 0.9 -> 0.7 */
+            padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); 
+        }
         .window-controls { display: flex; gap: 8px; margin-right: 20px; }
         .dot { width: 12px; height: 12px; border-radius: 50%; }
         .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
@@ -255,109 +260,33 @@
         // --- 2. LIVE NETWORK CANVAS SCRIPT ---
         const canvas = document.getElementById('network-canvas');
         const ctx = canvas.getContext('2d');
-        
         let width, height;
-        const resizeCanvas = () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        };
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        const resizeCanvas = () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; };
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
 
-        // Coordinates logic: Map user to SA (approx 55% width, 65% height on the bg image)
-        // Targets: Random major tech hubs relative to screen size
-        const origin = { x: 0.55, y: 0.65 }; // South Africa approx
-        const targets = [
-            { x: 0.25, y: 0.35 }, // USA
-            { x: 0.48, y: 0.25 }, // Europe
-            { x: 0.75, y: 0.35 }, // Asia
-            { x: 0.85, y: 0.75 }, // Aus
-            { x: 0.30, y: 0.70 }, // Brazil
-        ];
+        const origin = { x: 0.55, y: 0.65 }; // SA
+        const targets = [ { x: 0.25, y: 0.35 }, { x: 0.48, y: 0.25 }, { x: 0.75, y: 0.35 }, { x: 0.85, y: 0.75 }, { x: 0.30, y: 0.70 } ];
 
         class Packet {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.target = targets[Math.floor(Math.random() * targets.length)];
-                this.progress = 0;
-                this.speed = 0.005 + Math.random() * 0.01;
-                this.active = true;
-                this.color = Math.random() > 0.5 ? '#00f2ff' : '#7000ff';
-            }
-
-            update() {
-                this.progress += this.speed;
-                if (this.progress >= 1) {
-                    this.reset(); // Restart packet
-                }
-            }
-
+            constructor() { this.reset(); }
+            reset() { this.target = targets[Math.floor(Math.random() * targets.length)]; this.progress = 0; this.speed = 0.005 + Math.random() * 0.01; this.color = Math.random() > 0.5 ? '#00f2ff' : '#7000ff'; }
+            update() { this.progress += this.speed; if (this.progress >= 1) this.reset(); }
             draw() {
-                const startX = width * origin.x;
-                const startY = height * origin.y;
-                const endX = width * this.target.x;
-                const endY = height * this.target.y;
-
-                // Bezier Curve Logic
-                const cpX = (startX + endX) / 2;
-                const cpY = startY - 100; // Curve arch height
-
-                // Calculate current position on curve
-                const t = this.progress;
-                const currentX = (1-t)*(1-t)*startX + 2*(1-t)*t*cpX + t*t*endX;
-                const currentY = (1-t)*(1-t)*startY + 2*(1-t)*t*cpY + t*t*endY;
-
-                // Draw Head
-                ctx.beginPath();
-                ctx.arc(currentX, currentY, 2, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-
-                // Draw Trail (fading)
-                const tailT = Math.max(0, t - 0.1);
-                const tailX = (1-tailT)*(1-tailT)*startX + 2*(1-tailT)*tailT*cpX + tailT*tailT*endX;
-                const tailY = (1-tailT)*(1-tailT)*startY + 2*(1-tailT)*tailT*cpY + tailT*tailT*endY;
-
-                ctx.beginPath();
-                ctx.moveTo(currentX, currentY);
-                ctx.lineTo(tailX, tailY);
-                ctx.strokeStyle = this.color;
-                ctx.lineWidth = 1;
-                ctx.stroke();
-
-                // Draw Impact Ripple if finished
-                if (this.progress > 0.95) {
-                    ctx.beginPath();
-                    ctx.arc(endX, endY, (this.progress - 0.95) * 100, 0, Math.PI * 2);
-                    ctx.strokeStyle = `rgba(0, 242, 255, ${1 - (this.progress - 0.95) * 20})`;
-                    ctx.stroke();
-                }
+                const startX = width * origin.x; const startY = height * origin.y; const endX = width * this.target.x; const endY = height * this.target.y;
+                const cpX = (startX + endX) / 2; const cpY = startY - 100; const t = this.progress;
+                const currentX = (1-t)*(1-t)*startX + 2*(1-t)*t*cpX + t*t*endX; const currentY = (1-t)*(1-t)*startY + 2*(1-t)*t*cpY + t*t*endY;
+                ctx.beginPath(); ctx.arc(currentX, currentY, 2, 0, Math.PI * 2); ctx.fillStyle = this.color; ctx.fill();
+                const tailT = Math.max(0, t - 0.1); const tailX = (1-tailT)*(1-tailT)*startX + 2*(1-tailT)*tailT*cpX + tailT*tailT*endX; const tailY = (1-tailT)*(1-tailT)*startY + 2*(1-tailT)*tailT*cpY + tailT*tailT*endY;
+                ctx.beginPath(); ctx.moveTo(currentX, currentY); ctx.lineTo(tailX, tailY); ctx.strokeStyle = this.color; ctx.lineWidth = 1; ctx.stroke();
+                if (this.progress > 0.95) { ctx.beginPath(); ctx.arc(endX, endY, (this.progress - 0.95) * 100, 0, Math.PI * 2); ctx.strokeStyle = `rgba(0, 242, 255, ${1 - (this.progress - 0.95) * 20})`; ctx.stroke(); }
             }
         }
-
-        // Create 10 Packets
         const packets = Array.from({ length: 15 }, () => new Packet());
-
         function animateNetwork() {
             ctx.clearRect(0, 0, width, height);
-            
-            // Draw Origin Pulse (SA)
-            const oX = width * origin.x;
-            const oY = height * origin.y;
-            ctx.beginPath();
-            ctx.arc(oX, oY, 5, 0, Math.PI * 2);
-            ctx.fillStyle = '#00f2ff';
-            ctx.fill();
-
-            packets.forEach(p => {
-                p.update();
-                p.draw();
-            });
-
-            requestAnimationFrame(animateNetwork);
+            const oX = width * origin.x; const oY = height * origin.y;
+            ctx.beginPath(); ctx.arc(oX, oY, 5, 0, Math.PI * 2); ctx.fillStyle = '#00f2ff'; ctx.fill();
+            packets.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateNetwork);
         }
         animateNetwork();
 
@@ -369,20 +298,15 @@
                         entry.target.classList.add('scroll-visible');
                         if(entry.target.id === 'browser-window' && !entry.target.dataset.triggered) {
                             entry.target.dataset.triggered = "true";
-                            setTimeout(() => {
-                                document.getElementById('browser-loader').style.display = 'none';
-                                document.getElementById('browser-content-container').classList.add('fade-in-content');
-                            }, 2500);
+                            setTimeout(() => { document.getElementById('browser-loader').style.display = 'none'; document.getElementById('browser-content-container').classList.add('fade-in-content'); }, 2500);
                         }
                         if(entry.target.id === 'terminal-window' && !entry.target.dataset.triggered) {
-                            entry.target.dataset.triggered = "true";
-                            initTerminal();
+                            entry.target.dataset.triggered = "true"; initTerminal();
                         }
                     }
                 });
             }, { threshold: 0.4 });
-            observer.observe(document.getElementById('browser-window'));
-            observer.observe(document.getElementById('terminal-window'));
+            observer.observe(document.getElementById('browser-window')); observer.observe(document.getElementById('terminal-window'));
         };
 
         // --- 4. TERMINAL LOGIC ---
