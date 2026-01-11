@@ -1,10 +1,10 @@
-from django.urls import path
-from . import views
+from django.contrib import admin
+from django.urls import path, include 
+from core.views import index, projects  # Updated import
 
 urlpatterns = [
-    # The name='index' here is what the navbar looks for
-    path('', views.index, name='index'),
+    path('admin/', admin.site.urls),
     
-    # The name='projects' here is what the navbar looks for
-    path('projects/', views.projects, name='projects'),
+    # This line tells Django to look at your core/urls.py file for all other URLs
+    path('', include('core.urls')), 
 ]
