@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JAYS NETWORK | Portfolio</title>
+    <title>JAYS NETWORK | Command Terminal</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
@@ -16,7 +17,8 @@
             --bg-dark: #050505;
             --glass: rgba(20, 20, 35, 0.4);
             --glass-border: rgba(255, 255, 255, 0.1);
-            --text-gray: #8892b0;
+            --terminal-bg: #0c0c0c;
+            --terminal-green: #00ff00;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,7 +35,7 @@
             justify-content: center;
         }
 
-        /* The Interactive Background */
+        /* Background */
         #particles-js {
             position: fixed;
             top: 0; left: 0;
@@ -43,19 +45,16 @@
             z-index: -1;
         }
 
-        /* Main Container */
         .container {
             width: 100%;
-            max-width: 1100px;
+            max-width: 1200px;
             padding: 2rem;
             z-index: 10;
             text-align: center;
         }
 
-        /* Header Section */
-        .profile-header {
-            margin-bottom: 3rem;
-        }
+        /* Header */
+        .profile-header { margin-bottom: 3rem; }
 
         .avatar {
             width: 150px;
@@ -86,15 +85,15 @@
             margin-bottom: 1rem;
         }
 
-        /* Glass Cards Layout */
+        /* Grid Layout */
         .grid-layout {
             display: grid;
-            grid-template-columns: 1.5fr 1fr; /* Bio gets more space, Stats get less */
+            grid-template-columns: 1.4fr 1fr;
             gap: 2rem;
             text-align: left;
         }
 
-        /* Universal Glass Card Style */
+        /* Standard Glass Card */
         .glass-card {
             background: var(--glass);
             backdrop-filter: blur(12px);
@@ -104,77 +103,124 @@
             padding: 2rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
         .glass-card:hover {
             transform: translateY(-5px);
             border-color: var(--primary);
             box-shadow: 0 10px 40px rgba(0, 242, 255, 0.1);
         }
 
-        /* Bio Section */
-        .bio-text {
-            color: var(--text-gray);
-            line-height: 1.8;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
+        /* --- NEW: HACKER TERMINAL STYLE --- */
+        .terminal-card {
+            background: var(--terminal-bg);
+            border: 1px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            font-family: 'Fira Code', monospace;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
-        .highlight { color: white; font-weight: 600; }
-
-        /* Tech Stack Icons */
-        .tech-stack {
-            margin-top: 2rem;
+        .terminal-header {
+            background: #1f1f1f;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #333;
         }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+        .terminal-title { color: #888; font-size: 0.8rem; margin-left: 10px; }
+
+        .terminal-body {
+            padding: 20px;
+            flex-grow: 1;
+            color: var(--terminal-green);
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        /* Typing Animation */
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background: var(--terminal-green);
+            animation: blink 1s infinite;
+        }
+
+        .command-line { margin-bottom: 10px; display: none; } /* Hidden by default */
+        .stats-content { display: none; margin-top: 20px; opacity: 0; transition: opacity 1s; }
+        .fade-in { display: block !important; opacity: 1 !important; }
         
+        /* Stats Image styling */
+        .stats-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            border: 1px solid #333;
+            margin-bottom: 15px;
+        }
+
+        /* --- Tech Stack & Connect --- */
         .stack-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 0.9rem;
             color: var(--primary);
             margin-bottom: 1rem;
             display: block;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 8px;
         }
 
         .icons-row {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.2rem;
             flex-wrap: wrap;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
         }
-
         .icons-row i {
             transition: all 0.3s;
             cursor: pointer;
         }
-
         .icons-row i:hover {
             transform: scale(1.2);
             filter: drop-shadow(0 0 10px var(--primary));
             color: white;
         }
 
-        /* Stats Section */
-        .stats-container {
-            text-align: center;
+        /* Connect Section */
+        .connect-section { margin-top: 2.5rem; }
+        .social-row { display: flex; gap: 1rem; margin-top: 1rem; }
+        .social-btn {
+            width: 45px; height: 45px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: #aaa; text-decoration: none;
+            font-size: 1.5rem;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+        .social-btn:hover {
+            background: rgba(0, 242, 255, 0.1);
+            color: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
         }
 
-        .stats-container img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
+        .bio-text { color: var(--text-gray); line-height: 1.7; margin-bottom: 2rem; }
+        .highlight { color: white; font-weight: 600; }
 
-        /* Animations */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 900px) {
-            .grid-layout { grid-template-columns: 1fr; }
-            h1 { font-size: 2.5rem; }
-        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes blink { 50% { opacity: 0; } }
+        @media (max-width: 900px) { .grid-layout { grid-template-columns: 1fr; } h1 { font-size: 2.5rem; } }
     </style>
 </head>
 <body>
@@ -203,32 +249,53 @@
                 <div class="tech-stack">
                     <span class="stack-title">TECHNOLOGIES & TOOLS</span>
                     <div class="icons-row">
+                        <i class="devicon-python-plain colored" title="Python"></i>
                         <i class="devicon-typescript-plain colored" title="TypeScript"></i>
                         <i class="devicon-javascript-plain colored" title="JavaScript"></i>
-                        <i class="devicon-css3-plain colored" title="CSS3"></i>
                         <i class="devicon-csharp-plain colored" title="C#"></i>
                         <i class="devicon-kotlin-plain colored" title="Kotlin"></i>
                         <i class="devicon-postgresql-plain colored" title="PostgreSQL"></i>
                         <i class="devicon-debian-plain colored" title="Debian"></i>
-                        <i class="devicon-bash-plain colored" title="Terminal Tools"></i>
+                        <i class="devicon-yaml-plain colored" title="YAML"></i>
+                        <i class="devicon-css3-plain colored" title="CSS3"></i>
+                        <i class="fas fa-code" title="Replit/IDE" style="color: #F26207;"></i>
+                    </div>
+                </div>
+
+                <div class="connect-section">
+                    <span class="stack-title">CONNECT WITH ME</span>
+                    <div class="social-row">
+                        <a href="mailto:jullian@jays-network.com" class="social-btn" title="Email Me"><i class="fa-solid fa-envelope"></i></a>
+                        <a href="#" class="social-btn" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#" class="social-btn" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
                     </div>
                 </div>
             </div>
 
-            <div class="glass-card stats-container">
-                <h3 class="stack-title" style="text-align: center;">MY GITHUB STATS</h3>
-                
-                <a href="https://github.com/Jays-Network">
-                    <img src="https://github-readme-stats-opal-iota-47.vercel.app/api?username=Jays-Network&show_icons=true&locale=en&theme=tokyonight" 
-                         alt="Jays-Network Stats" />
-                </a>
-
-                <br/><br/>
-
-                <a href="https://github.com/Jays-Network">
-                    <img src="https://github-readme-stats.vercel.app/api/top-langs?username=Jays-Network&layout=compact&locale=en&theme=tokyonight" 
-                         alt="Top Languages" />
-                </a>
+            <div class="terminal-card">
+                <div class="terminal-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                    <div class="terminal-title">jay@nexus:~/stats</div>
+                </div>
+                <div class="terminal-body">
+                    <div id="terminal-content">
+                        <div class="command-line" id="cmd1">root@nexus:~# ./fetch_metrics.sh</div>
+                        <div class="command-line" id="cmd2">> Connecting to GitHub API... [OK]</div>
+                        <div class="command-line" id="cmd3">> Decrypting user data... [OK]</div>
+                        <div class="command-line" id="cmd4">> Render output:</div>
+                    </div>
+                    
+                    <div class="stats-content" id="stats-display">
+                         <a href="https://github.com/Jays-Network">
+                            <img src="https://github-readme-stats.vercel.app/api?username=Jays-Network&show_icons=true&theme=dark&hide_border=true&bg_color=0c0c0c" 
+                                 alt="Jays-Network Stats" />
+                        </a>
+                        <div>root@nexus:~/stats# <span class="cursor"></span></div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -236,6 +303,7 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        // 1. Particle Background Config
         particlesJS("particles-js", {
             "particles": {
                 "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
@@ -251,6 +319,18 @@
                 "events": { "onhover": { "enable": true, "mode": "grab" } },
                 "modes": { "grab": { "distance": 180, "line_linked": { "opacity": 0.8 } } }
             }
+        });
+
+        // 2. Terminal Boot Animation Script
+        // This makes the text appear one line at a time
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => { document.getElementById('cmd1').style.display = 'block'; }, 500);
+            setTimeout(() => { document.getElementById('cmd2').style.display = 'block'; }, 1500);
+            setTimeout(() => { document.getElementById('cmd3').style.display = 'block'; }, 2500);
+            setTimeout(() => { document.getElementById('cmd4').style.display = 'block'; }, 3500);
+            setTimeout(() => { 
+                document.getElementById('stats-display').classList.add('fade-in'); 
+            }, 4000);
         });
     </script>
 </body>
