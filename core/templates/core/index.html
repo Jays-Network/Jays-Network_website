@@ -119,7 +119,7 @@
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
             display: flex;
             flex-direction: column;
-            min-height: 400px; /* Ensure height for text */
+            min-height: 400px;
         }
 
         .terminal-header {
@@ -251,7 +251,7 @@
                     <div class="dot red"></div>
                     <div class="dot yellow"></div>
                     <div class="dot green"></div>
-                    <div class="terminal-title">root@nexus-server:~</div>
+                    <div class="terminal-title">root@Jullian-server:~</div>
                 </div>
                 <div class="terminal-body" id="terminal-content">
                     <span class="cursor"></span>
@@ -310,7 +310,7 @@
 
         async function initTerminal() {
             await delay(800);
-            addLine(`root@nexus:~$ ./fetch_metrics.sh --target ${username}`, 'cmd');
+            addLine(`root@Jullian:~$ ./fetch_metrics.sh --target ${username}`, 'cmd');
             
             await delay(1000);
             addLine(`> Initializing API handshake...`, 'output');
@@ -336,7 +336,7 @@
                 addLine(`> <strong>GITHUB_METRICS_V1.0</strong>`, 'output');
                 addLine(`> --------------------------------`, 'output');
                 
-                // Render The Live Stats
+                // Render The Live Stats (ID Removed)
                 addLine(`> USERNAME   : <span class="highlight-stat">${userData.login}</span>`, 'output');
                 await delay(200);
                 addLine(`> REPOS (PUB): <span class="highlight-stat">${userData.public_repos}</span>`, 'output');
@@ -345,13 +345,11 @@
                 await delay(200);
                 addLine(`> FOLLOWERS  : <span class="highlight-stat">${userData.followers}</span>`, 'output');
                 await delay(200);
-                addLine(`> ID         : <span class="highlight-stat">${userData.id}</span>`, 'output');
-                await delay(200);
                 addLine(`> STATUS     : <span class="success">ONLINE</span>`, 'output');
                 
                 await delay(500);
                 addLine(`> --------------------------------`, 'output');
-                addLine(`root@nexus:~$ <span class="success">Done.</span>`, 'cmd');
+                addLine(`root@Jullian:~$ <span class="success">Done.</span>`, 'cmd');
 
             } catch (error) {
                 addLine(`> <span class="warning">Error: Could not reach GitHub Mainframe.</span>`, 'output');
