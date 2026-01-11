@@ -21,6 +21,11 @@ jobs:
           source /home/jay/jays_network/venv/bin/activate
           python manage.py migrate
 
+      - name: Collect Static Files
+        run: |
+          source /home/jay/jays_network/venv/bin/activate
+          python manage.py collectstatic --noinput
+
       - name: Restart Website
         run: |
           sudo systemctl restart gunicorn
