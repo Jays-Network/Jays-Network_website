@@ -1,0 +1,26 @@
+name: Deploy to Home Lab
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v3
+
+      - name: Update Python Dependencies
+        run: |
+          source /home/jay/jays_network/venv/bin/activate
+          pip install -r requirements.txt
+
+      - name: Update Database
+        run: |
+          source /home/jay/jays_network/venv/bin/activate
+          python manage.py migrate
+
+      - name: Restart Website
+        run: |
+          sudo systemctl restart gunicorn

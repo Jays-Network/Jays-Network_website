@@ -1,6 +1,9 @@
 venv/
+*.sqlite3
 *.pyc
 __pycache__/
 db.sqlite3
 .DS_Store
 .env
+actions-runner/
+*.tar.gz
