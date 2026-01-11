@@ -8,3 +8,4 @@ db.sqlite3
 actions-runner/
 *.tar.gz
 backup_code/
+staticfiles/
