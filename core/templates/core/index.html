@@ -3,49 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jay's Network | Future Tech</title>
+    <title>JAYS NETWORK | Command Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --primary: #00f2ff;
+            --secondary: #7000ff;
+            --bg-dark: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            background-color: #0f172a;
-            color: #e2e8f0;
-            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
         }
-        h1 {
-            font-size: 3rem;
-            color: #38bdf8;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 10px #38bdf8;
+
+        /* The Interactive Background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%);
+            z-index: -1;
         }
-        p { font-size: 1.2rem; color: #94a3b8; }
+
+        /* Main Container */
         .container {
-            border: 1px solid #334155;
+            text-align: center;
+            z-index: 10;
             padding: 2rem;
-            border-radius: 8px;
-            background: #1e293b;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
         }
-        .status {
-            color: #4ade80;
-            font-weight: bold;
-            margin-top: 20px;
-            display: block;
+
+        /* Typography */
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            background: linear-gradient(90deg, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+            animation: glow 3s infinite alternate;
+        }
+
+        p.subtitle {
+            color: #8892b0;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            letter-spacing: 1px;
+        }
+
+        /* Status Pill */
+        .status-pill {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            color: #00ff88;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+        }
+
+        /* Glass Cards Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1);
+        }
+
+        .card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .card h3 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .card p {
+            color: #8892b0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(0, 242, 255, 0.1); }
+            to { text-shadow: 0 0 30px rgba(0, 242, 255, 0.5); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+
+    <div id="particles-js"></div>
+
     <div class="container">
+        <div class="status-pill">● SYSTEM OPTIMAL</div>
+        
         <h1>JAY'S NETWORK</h1>
-        <p>Advanced Infrastructure & Software Solutions</p>
-        <hr style="border-color: #334155; margin: 20px 0;">
-        <p>Our new platform is currently initializing.</p>
-    <span class="status">● AUTOMATION: ONLINE</span>     
-</div>
+        <p class="subtitle">Advanced Infrastructure & Software Solutions</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🚀</div>
+                <h3>NexusComs</h3>
+                <p>Next-gen secure communication platform. Currently in active development.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Home Lab</h3>
+                <p>Proxmox Cluster control, storage management, and surveillance systems.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🔒</div>
+                <h3>Secure Access</h3>
+                <p>Twingate remote tunnel and internal network diagnostics.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#00f2ff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#7000ff", "opacity": 0.4, "width": 1 },
+                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": { "distance": 140, "line_linked": { "opacity": 1 } }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
 </body>
 </html>
