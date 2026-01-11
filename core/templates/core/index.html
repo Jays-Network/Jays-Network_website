@@ -32,7 +32,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
 
         /* --- 1. BOOT LOADER SCREEN --- */
@@ -46,71 +45,90 @@
         .progress-bar-fill { height: 100%; width: 0%; background: var(--terminal-green); box-shadow: 0 0 10px var(--terminal-green); transition: width 0.1s linear; }
         .hex-stream { position: absolute; bottom: 20px; font-size: 0.8rem; opacity: 0.5; color: var(--primary); }
 
-        /* --- MAIN CONTENT --- */
-        #main-interface { opacity: 0; transition: opacity 1s ease; width: 100%; display: flex; flex-direction: column; align-items: center; }
+        /* --- MAIN LAYOUT --- */
+        #main-interface { opacity: 0; transition: opacity 1s ease; width: 100%; display: flex; flex-direction: column; align-items: center; padding-bottom: 100px; }
         #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%); z-index: -1; }
-        .container { width: 100%; max-width: 1200px; padding: 2rem; z-index: 10; text-align: center; }
+        
+        .container { 
+            width: 100%; max-width: 900px; padding: 2rem; z-index: 10; text-align: center; 
+            display: flex; flex-direction: column; gap: 80px; /* Big gap for scrolling */
+        }
         
         /* Header */
-        .profile-header { margin-bottom: 3rem; }
+        .profile-header { margin-top: 5rem; margin-bottom: 2rem; opacity: 0; transform: translateY(30px); transition: all 1s ease; }
         .avatar { width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--primary); box-shadow: 0 0 30px rgba(0, 242, 255, 0.3); margin-bottom: 1.5rem; animation: float 6s ease-in-out infinite; }
         h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; background: linear-gradient(90deg, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; text-transform: uppercase; }
         .role { font-family: 'Orbitron', sans-serif; color: var(--secondary); font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 1rem; }
-        .grid-layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem; text-align: left; }
 
-        /* --- HACKER BROWSER WINDOW --- */
+        /* --- SCROLL ANIMATION CLASSES --- */
+        .scroll-hidden {
+            opacity: 0;
+            transform: translateY(100px) scale(0.95); /* Start lower and slightly smaller */
+            filter: blur(10px); /* Start blurry */
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); /* "Spring" physics */
+        }
+        
+        .scroll-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+        /* --- BROWSER CARD --- */
         .browser-card {
             background: rgba(15, 15, 20, 0.8); backdrop-filter: blur(10px); border: 1px solid #333;
-            border-radius: 8px; overflow: hidden; box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
-            transform: translateY(20px); opacity: 0;
-            min-height: 400px; display: flex; flex-direction: column;
+            border-radius: 12px; overflow: hidden; box-shadow: 0 0 50px rgba(0, 0, 0, 0.6);
+            min-height: 450px; display: flex; flex-direction: column; text-align: left;
+            width: 100%;
         }
-        .browser-header { background: var(--browser-header); padding: 10px 15px; display: flex; align-items: center; border-bottom: 1px solid #444; }
-        .window-controls { display: flex; gap: 8px; margin-right: 15px; }
+        .browser-header { background: var(--browser-header); padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid #444; }
+        .window-controls { display: flex; gap: 8px; margin-right: 20px; }
         .dot { width: 12px; height: 12px; border-radius: 50%; }
         .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
-        .url-bar { background: #111; color: #888; font-family: 'Fira Code', monospace; font-size: 0.8rem; padding: 5px 15px; border-radius: 4px; flex-grow: 1; text-align: center; border: 1px solid #333; }
-        .browser-body { padding: 2rem; flex-grow: 1; position: relative; }
+        .url-bar { background: #111; color: #888; font-family: 'Fira Code', monospace; font-size: 0.8rem; padding: 8px 15px; border-radius: 4px; flex-grow: 1; text-align: center; border: 1px solid #333; }
+        
+        .browser-body { padding: 3rem; flex-grow: 1; position: relative; }
 
-        /* --- BROWSER LOADER --- */
+        /* Browser Internal Loader */
         #browser-loader {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            background: rgba(15, 15, 20, 0.9); z-index: 20; color: var(--primary); font-family: 'Fira Code';
+            background: rgba(15, 15, 20, 1); z-index: 20; color: var(--primary); font-family: 'Fira Code';
         }
         .scanning-text { margin-top: 15px; letter-spacing: 1px; animation: flicker 2s infinite; }
 
-        /* --- TERMINAL WINDOW --- */
+        /* --- TERMINAL CARD --- */
         .terminal-card {
-            background: var(--terminal-bg); border: 1px solid #333; border-radius: 8px; overflow: hidden;
-            font-family: 'Fira Code', monospace; box-shadow: 0 0 30px rgba(0, 0, 0, 0.9); display: flex; flex-direction: column;
-            min-height: 400px; transform: translateY(20px); opacity: 0;
+            background: var(--terminal-bg); border: 1px solid #333; border-radius: 12px; overflow: hidden;
+            font-family: 'Fira Code', monospace; box-shadow: 0 0 50px rgba(0, 242, 255, 0.05); display: flex; flex-direction: column;
+            min-height: 500px; text-align: left; width: 100%;
         }
-        .terminal-header { background: #1a1a1a; padding: 10px 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #333; }
+        .terminal-header { background: #1a1a1a; padding: 12px 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #333; }
         .terminal-title { color: #888; font-size: 0.8rem; margin-left: 10px; }
-        .terminal-body { padding: 20px; flex-grow: 1; color: var(--terminal-green); font-size: 0.95rem; line-height: 1.6; overflow-y: auto; }
+        .terminal-body { padding: 25px; flex-grow: 1; color: var(--terminal-green); font-size: 0.95rem; line-height: 1.6; overflow-y: auto; }
 
         /* Content Styling */
         .stack-title { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: var(--primary); margin-bottom: 1rem; display: block; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; }
-        .bio-text { color: var(--text-gray); line-height: 1.7; margin-bottom: 2rem; }
+        .bio-text { color: var(--text-gray); line-height: 1.7; margin-bottom: 2rem; font-size: 1.1rem; }
         .highlight { color: white; font-weight: 600; }
-        .icons-row { display: flex; gap: 1.2rem; flex-wrap: wrap; font-size: 2.2rem; }
+        .icons-row { display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 2.5rem; margin-bottom: 2rem; }
         .icons-row i { transition: all 0.3s; cursor: pointer; } .icons-row i:hover { transform: scale(1.2); filter: drop-shadow(0 0 10px var(--primary)); color: white; }
-        .connect-section { margin-top: 2.5rem; } .social-row { display: flex; gap: 1rem; margin-top: 1rem; }
-        .social-btn { width: 45px; height: 45px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #aaa; text-decoration: none; font-size: 1.5rem; transition: 0.3s; border: 1px solid transparent; }
+        .connect-section { margin-top: 2rem; } .social-row { display: flex; gap: 1rem; margin-top: 1rem; }
+        .social-btn { width: 50px; height: 50px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #aaa; text-decoration: none; font-size: 1.5rem; transition: 0.3s; border: 1px solid transparent; }
         .social-btn:hover { background: rgba(0, 242, 255, 0.1); color: var(--primary); border-color: var(--primary); transform: translateY(-3px); }
 
-        /* Animations */
+        /* Animations & Helpers */
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        .pop-in { animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-        @keyframes popIn { to { opacity: 1; transform: translateY(0); } }
         .fade-in-content { animation: fadeIn 1s forwards; display: block !important; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .cmd-line { margin-bottom: 5px; opacity: 0; animation: fadeIn 0.1s forwards; }
+        .output-line { color: #ccc; margin-bottom: 15px; margin-left: 10px; opacity: 0; animation: fadeIn 0.1s forwards; }
+        .success { color: var(--terminal-green); } .warning { color: #f1c40f; } .highlight-stat { color: var(--primary); font-weight: bold; }
         .cursor { display: inline-block; width: 8px; height: 16px; background: var(--terminal-green); animation: blink 1s infinite; vertical-align: middle; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        @media (max-width: 900px) { .grid-layout { grid-template-columns: 1fr; } h1 { font-size: 2.5rem; } }
+        @media (max-width: 900px) { .container { gap: 40px; } h1 { font-size: 2.5rem; } }
     </style>
 </head>
 <body>
@@ -134,82 +152,76 @@
                 <div style="color: #00ff88; font-size: 0.8rem; font-family: 'Orbitron'; margin-top: 10px;">● SYSTEMS ONLINE</div>
             </div>
 
-            <div class="grid-layout">
-                
-                <div class="browser-card" id="browser-window">
-                    <div class="browser-header">
-                        <div class="window-controls">
-                            <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
-                        </div>
-                        <div class="url-bar"><i class="fas fa-lock" style="font-size: 0.7rem; margin-right:5px; color:#27c93f;"></i> secure://jays-network/profile</div>
-                    </div>
-                    <div class="browser-body">
-                        
-                        <div id="browser-loader">
-                            <i class="fas fa-database fa-spin fa-3x"></i>
-                            <div class="scanning-text">ACCESSING ENCRYPTED PROFILE DATA...</div>
-                        </div>
-
-                        <div id="browser-content-container" style="display: none; opacity: 0;">
-                            <h3 class="stack-title">ABOUT ME</h3>
-                            <p class="bio-text">
-                                I am an up-and-coming <span class="highlight">Full Stack programmer</span> and software engineer. 
-                                I'm <span class="highlight">self-taught</span> and dedicated to building new projects with a strong passion and drive.
-                                Currently architecting solutions for <span class="highlight">Custom Communications</span> and managing advanced Home Lab infrastructure.
-                            </p>
-                            <div class="tech-stack">
-                                <span class="stack-title">TECHNOLOGIES & TOOLS</span>
-                                <div class="icons-row">
-                                    <i class="devicon-python-plain colored" title="Python"></i>
-                                    <i class="devicon-typescript-plain colored" title="TypeScript"></i>
-                                    <i class="devicon-javascript-plain colored" title="JavaScript"></i>
-                                    <i class="devicon-csharp-plain colored" title="C#"></i>
-                                    <i class="devicon-kotlin-plain colored" title="Kotlin"></i>
-                                    <i class="devicon-postgresql-plain colored" title="PostgreSQL"></i>
-                                    <i class="devicon-debian-plain colored" title="Debian"></i>
-                                    <i class="devicon-yaml-plain colored" title="YAML"></i>
-                                    <i class="fas fa-code" title="Replit/IDE" style="color: #F26207;"></i>
-                                </div>
-                            </div>
-                            <div class="connect-section">
-                                <span class="stack-title">CONNECT WITH ME</span>
-                                <div class="social-row">
-                                    <a href="mailto:jullian@jays-network.com" class="social-btn"><i class="fa-solid fa-envelope"></i></a>
-                                    <a href="#" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
-                                    <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
-                                    <a href="#" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="terminal-card" id="terminal-window">
-                    <div class="terminal-header">
+            <div class="browser-card scroll-hidden" id="browser-window">
+                <div class="browser-header">
+                    <div class="window-controls">
                         <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
-                        <div class="terminal-title">Status Terminal</div>
                     </div>
-                    <div class="terminal-body" id="terminal-content">
-                        <span class="cursor"></span>
+                    <div class="url-bar"><i class="fas fa-lock" style="font-size: 0.7rem; margin-right:5px; color:#27c93f;"></i> secure://jays-network/profile</div>
+                </div>
+                <div class="browser-body">
+                    
+                    <div id="browser-loader">
+                        <i class="fas fa-database fa-spin fa-3x"></i>
+                        <div class="scanning-text">ACCESSING ENCRYPTED PROFILE DATA...</div>
+                    </div>
+
+                    <div id="browser-content-container" style="display: none; opacity: 0;">
+                        <h3 class="stack-title">ABOUT ME</h3>
+                        <p class="bio-text">
+                            I am an up-and-coming <span class="highlight">Full Stack programmer</span> and software engineer. 
+                            I'm <span class="highlight">self-taught</span> and dedicated to building new projects with a strong passion and drive.
+                            Currently architecting solutions for <span class="highlight">Custom Communications</span> and managing advanced Home Lab infrastructure.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="stack-title">TECHNOLOGIES & TOOLS</span>
+                            <div class="icons-row">
+                                <i class="devicon-python-plain colored" title="Python"></i>
+                                <i class="devicon-typescript-plain colored" title="TypeScript"></i>
+                                <i class="devicon-javascript-plain colored" title="JavaScript"></i>
+                                <i class="devicon-csharp-plain colored" title="C#"></i>
+                                <i class="devicon-kotlin-plain colored" title="Kotlin"></i>
+                                <i class="devicon-postgresql-plain colored" title="PostgreSQL"></i>
+                                <i class="devicon-debian-plain colored" title="Debian"></i>
+                                <i class="devicon-yaml-plain colored" title="YAML"></i>
+                                <i class="fas fa-code" title="Replit/IDE" style="color: #F26207;"></i>
+                            </div>
+                        </div>
+                        <div class="connect-section">
+                            <span class="stack-title">CONNECT WITH ME</span>
+                            <div class="social-row">
+                                <a href="mailto:jullian@jays-network.com" class="social-btn"><i class="fa-solid fa-envelope"></i></a>
+                                <a href="#" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
+                                <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="#" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
+
+            <div class="terminal-card scroll-hidden" id="terminal-window">
+                <div class="terminal-header">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                    <div class="terminal-title">Status Terminal</div>
+                </div>
+                <div class="terminal-body" id="terminal-content">
+                    <span class="cursor"></span>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // BOOT SEQUENCE
+        // --- 1. BOOT SEQUENCE ---
         const bootScreen = document.getElementById('boot-screen');
         const progressBar = document.getElementById('progress-fill');
         const loaderText = document.getElementById('loader-text');
         const hexStream = document.getElementById('hex-stream');
         const mainInterface = document.getElementById('main-interface');
-        const browserWindow = document.getElementById('browser-window');
-        const terminalWindow = document.getElementById('terminal-window');
-        const browserLoader = document.getElementById('browser-loader');
-        const browserContent = document.getElementById('browser-content-container');
+        const header = document.querySelector('.profile-header');
 
         setInterval(() => {
             let hex = ''; for(let i=0; i<8; i++) hex += '0x' + Math.floor(Math.random()*255).toString(16).toUpperCase() + ' ';
@@ -232,35 +244,60 @@
                     setTimeout(() => { 
                         bootScreen.style.display = 'none';
                         mainInterface.style.opacity = '1';
-                        browserWindow.classList.add('pop-in');
-                        terminalWindow.classList.add('pop-in');
+                        // Reveal Header First
+                        header.classList.add('scroll-visible');
                         
-                        setTimeout(() => {
-                            browserLoader.style.display = 'none';
-                            browserContent.classList.add('fade-in-content');
-                            initTerminal();
-                        }, 2500);
-
+                        // Start the Scroll Observer
+                        initScrollObserver();
                     }, 500);
                 }, 800);
             }
         }, 30);
 
-        // PARTICLES & TERMINAL
+        // --- 2. INTERSECTION OBSERVER (THE SLIDE TRIGGER) ---
+        // This watches elements and triggers animations when they hit 40% of the screen
+        const initScrollObserver = () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('scroll-visible');
+                        
+                        // IF it is the Browser, start the DB Scan
+                        if(entry.target.id === 'browser-window' && !entry.target.dataset.triggered) {
+                            entry.target.dataset.triggered = "true"; // Run only once
+                            setTimeout(() => {
+                                document.getElementById('browser-loader').style.display = 'none';
+                                document.getElementById('browser-content-container').classList.add('fade-in-content');
+                            }, 2500);
+                        }
+
+                        // IF it is the Terminal, start typing
+                        if(entry.target.id === 'terminal-window' && !entry.target.dataset.triggered) {
+                            entry.target.dataset.triggered = "true"; // Run only once
+                            initTerminal();
+                        }
+                    }
+                });
+            }, { threshold: 0.4 }); // Trigger when 40% of element is visible
+
+            // Tell observer what to watch
+            observer.observe(document.getElementById('browser-window'));
+            observer.observe(document.getElementById('terminal-window'));
+        };
+
+        // --- 3. PARTICLES & TERMINAL LOGIC ---
         particlesJS("particles-js", { "particles": { "number": { "value": 60 }, "color": { "value": "#00f2ff" }, "line_linked": { "color": "#7000ff", "opacity": 0.3 } } });
+        
         const terminalBox = document.getElementById('terminal-content'); const username = 'Jays-Network'; const delay = ms => new Promise(res => setTimeout(res, ms));
         function addLine(text, type = 'cmd') {
             const existingCursor = document.querySelector('.cursor'); if(existingCursor) existingCursor.remove();
             const div = document.createElement('div'); div.className = type === 'cmd' ? 'cmd-line' : 'output-line'; div.innerHTML = text; terminalBox.appendChild(div);
             const newCursor = document.createElement('span'); newCursor.className = 'cursor'; terminalBox.appendChild(newCursor); terminalBox.scrollTop = terminalBox.scrollHeight;
         }
-        
-        // UPDATED TERMINAL PROMPT HERE
+
         async function initTerminal() {
             await delay(500); 
-            // CHANGED: Prompt updated here
             addLine(`Jullian@Status-Terminal:~$ ./fetch_metrics.sh --target ${username}`, 'cmd');
-            
             await delay(800); addLine(`> Initializing API handshake...`, 'output');
             try {
                 const userRes = await fetch(`https://api.github.com/users/${username}`); const userData = await userRes.json();
@@ -273,8 +310,6 @@
                 addLine(`> STARS      : <span class="highlight-stat">${totalStars}</span>`, 'output'); await delay(200);
                 addLine(`> FOLLOWERS  : <span class="highlight-stat">${userData.followers}</span>`, 'output'); await delay(200);
                 addLine(`> STATUS     : <span class="success">ONLINE</span>`, 'output'); await delay(500);
-                
-                // CHANGED: Final prompt updated here
                 addLine(`Jullian@Status-Terminal:~$ <span class="success">Done.</span>`, 'cmd');
             } catch (error) { addLine(`> <span class="warning">Error: Could not reach GitHub.</span>`, 'output'); }
         }
