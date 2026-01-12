@@ -1,4 +1,32 @@
-from django.shortcuts import render
+import requests
+from django.conf import settings
+from django.shortcuts import render, redirect
+from django.contrib import messages
+
+def send_telegram_message(message):
+    """
+    Fetches credentials from settings (loaded from .env) 
+    and fires the message to your Telegram Group.
+    """
+    token = settings.TELEGRAM_BOT_TOKEN
+    chat_id = settings.TELEGRAM_CHAT_ID
+
+    # Safety Check: Warn in console if keys are missing
+    if not token or not chat_id:
+        print("⚠️ ERROR: Telegram credentials missing in settings/.env")
+        return
+
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    payload = {
+        "chat_id": chat_id,
+        "text": message,
+        "parse_mode": "Markdown"
+    }
+    
+    try:
+        requests.post(url, json=payload)
+    except Exception as e:
+        print(f"Error sending transmission: {e}")
 
 def index(request):
     return render(request, 'core/index.html')
@@ -7,4 +35,25 @@ def projects(request):
     return render(request, 'core/projects.html')
 
 def contact(request):
+    if request.method == 'POST':
+        # 1. Capture the form data from the HTML inputs
+        name = request.POST.get('operator_id')
+        subject = request.POST.get('subject')
+        msg_body = request.POST.get('message')
+
+        # 2. Format the message for the Cyberpunk look
+        formatted_message = (
+            f"🚨 *INCOMING TRANSMISSION* 🚨\n\n"
+            f"👤 *Operator:* `{name}`\n"
+            f"📂 *Subject:* `{subject}`\n"
+            f"📝 *Payload:* \n{msg_body}"
+        )
+
+        # 3. Fire the Uplink function
+        send_telegram_message(formatted_message)
+
+        # 4. Show success message on the website
+        messages.success(request, 'UPLINK SUCCESSFUL. TRANSMISSION SENT.')
+        return redirect('contact')
+
     return render(request, 'core/contact.html')
