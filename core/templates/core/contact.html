@@ -7,35 +7,41 @@
         
         <div class="terminal-header">
             <div class="status-dot blink"></div>
-            <h2>ESTABLISH UPLINK // COMM_CHANNEL_OPEN</h2>
+            <h2>SECURE UPLINK // SELECT_FREQUENCY</h2>
         </div>
 
-        <div class="uplink-section">
-            <h3>SELECT FREQUENCY</h3>
-            <div class="social-grid">
-                <a href="https://github.com/Jays-Network" target="_blank" class="social-node">
-                    <i class="fab fa-github"></i>
-                    <span>GITHUB</span>
-                </a>
-                <a href="#" class="social-node">
-                    <i class="fab fa-linkedin"></i>
-                    <span>LINKEDIN</span>
-                </a>
-                <a href="#" class="social-node">
-                    <i class="fas fa-envelope"></i>
-                    <span>EMAIL</span>
-                </a>
-                <a href="#" class="social-node">
-                    <i class="fab fa-discord"></i>
-                    <span>DISCORD</span>
-                </a>
-            </div>
+        <div class="frequency-grid">
+            <a href="https://github.com/Jays-Network" target="_blank" class="freq-node">
+                <i class="fab fa-github"></i>
+                <span>GITHUB_REPO</span>
+            </a>
+            <a href="#" class="freq-node">
+                <i class="fab fa-linkedin"></i>
+                <span>LINKEDIN_SIGNAL</span>
+            </a>
+            <a href="#" class="freq-node">
+                <i class="fab fa-discord"></i>
+                <span>DISCORD_SERVER</span>
+            </a>
+            <a href="#" class="freq-node">
+                <i class="fas fa-envelope"></i>
+                <span>ENCRYPTED_MAIL</span>
+            </a>
         </div>
 
         <hr class="neon-divider">
 
         <form class="cyber-form" method="post">
             {% csrf_token %}
+            
+            {% if messages %}
+                {% for message in messages %}
+                <div class="terminal-alert" style="color: #33ff00; margin-bottom: 1rem; border: 1px solid #33ff00; padding: 10px;">
+                    <i class="fas fa-check-circle"></i> {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+
             <div class="input-row">
                 <div class="input-group">
                     <label>OPERATOR_ID</label>
@@ -56,6 +62,7 @@
                 SEND TRANSMISSION <i class="fas fa-paper-plane"></i>
             </button>
         </form>
+
     </div>
 </div>
 {% endblock %}
