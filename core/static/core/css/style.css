@@ -209,36 +209,81 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
     box-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
 }
 
-/* --- THE MAIN PAGE UPLINK BUTTON --- */
+/* --- UPLINK GLASS BUTTON (UPDATED) --- */
 .action-area {
-    margin-top: 3rem;
-    text-align: center;
+    margin-top: 2rem;
+    /* Keeps it aligned with the text above it */
+    text-align: left; 
 }
 
 .terminal-text {
-    color: #888;
+    color: #00f3ff;
     font-family: 'Fira Code', monospace;
     font-size: 0.9rem;
     margin-bottom: 1rem;
+    letter-spacing: 1px;
 }
 
 .uplink-btn {
     position: relative;
-    display: inline-block;
-    padding: 15px 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 3rem;
+    
+    /* GLASS EFFECT */
+    background: rgba(0, 243, 255, 0.05); /* Very sheer cyan */
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    backdrop-filter: blur(8px); /* Blurs whatever is behind it */
+    -webkit-backdrop-filter: blur(8px); /* Safari support */
+    
+    /* FONT & TEXT */
     color: #00f3ff;
-    text-decoration: none;
-    text-transform: uppercase;
     font-family: 'Orbitron', sans-serif;
-    font-weight: bold;
+    font-weight: 700;
+    text-decoration: none;
     letter-spacing: 2px;
-    border: 1px solid #00f3ff;
-    overflow: hidden;
-    transition: 0.3s;
+    text-transform: uppercase;
+    
+    /* ANIMATION BASE */
+    transition: all 0.4s ease;
+    overflow: hidden; /* Contains the light shine effect */
 }
 
+/* Hide the extra glitch text for a clean glass look */
+.btn-glitch {
+    display: none;
+}
+
+/* --- HOVER INTERACTIVITY --- */
 .uplink-btn:hover {
-    background: rgba(0, 243, 255, 0.1);
-    box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
-    text-shadow: 0 0 10px rgba(0, 243, 255, 0.8);
+    /* Brighter background and border */
+    background: rgba(0, 243, 255, 0.2);
+    border-color: #00f3ff;
+    /* Outer glow and inner glow */
+    box-shadow: 0 0 35px rgba(0, 243, 255, 0.6), inset 0 0 15px rgba(0, 243, 255, 0.4);
+    /* Text turns white */
+    color: #ffffff;
+    /* Slight lift effect */
+    transform: translateY(-3px);
+}
+
+/* Light Shine Animation */
+.uplink-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    opacity: 0;
+    transform: rotate(35deg);
+    background: rgba(255, 255, 255, 0.7);
+    filter: blur(10px);
+    transition: 0.7s ease-in-out;
+}
+
+.uplink-btn:hover::after {
+    opacity: 1;
+    left: 130%; /* Moves the shine across the button */
 }
