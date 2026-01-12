@@ -5,3 +5,6 @@ def index(request):
 
 def projects(request):
     return render(request, 'core/projects.html')
+
+def contact(request):
+    return render(request, 'core/contact.html')

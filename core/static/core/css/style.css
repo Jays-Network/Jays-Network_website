@@ -113,3 +113,162 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
 .success { color: var(--terminal-green); } .warning { color: #f1c40f; } .highlight-stat { color: var(--primary); font-weight: bold; }
 .cursor { display: inline-block; width: 8px; height: 16px; background: var(--terminal-green); animation: blink 1s infinite; vertical-align: middle; }
 @keyframes blink { 50% { opacity: 0; } }
+
+/* --- CONTACT TERMINAL STYLES --- */
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+    padding: 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.terminal-window {
+    background: rgba(10, 10, 20, 0.85); /* Dark Glass */
+    border: 1px solid #00f3ff; /* Cyan Border */
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 700px;
+    backdrop-filter: blur(10px);
+    clip-path: polygon(
+        0 0, 
+        100% 0, 
+        100% 95%, 
+        95% 100%, 
+        0 100%
+    ); /* Sci-fi corner cut */
+}
+
+/* Header with Blinking Dot */
+.terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(0, 243, 255, 0.3);
+    padding-bottom: 1rem;
+}
+
+.terminal-header h2 {
+    color: #00f3ff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    background: #00ff41; /* Hacker Green */
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff41;
+}
+
+.blink {
+    animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+    50% { opacity: 0; }
+}
+
+/* Social Uplink Grid */
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.social-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 243, 255, 0.05);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    padding: 1rem;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-node i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #00f3ff;
+}
+
+.social-node span {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+}
+
+.social-node:hover {
+    background: rgba(0, 243, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+    transform: translateY(-3px);
+}
+
+/* Cyber Form Inputs */
+.cyber-form h3, .uplink-section h3 {
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    color: #00f3ff;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.input-group input, 
+.input-group textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-bottom: 2px solid #333;
+    color: #fff;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+    transition: 0.3s;
+}
+
+.input-group input:focus, 
+.input-group textarea:focus {
+    outline: none;
+    border-bottom: 2px solid #00f3ff;
+    background: rgba(0, 243, 255, 0.05);
+}
+
+/* Button */
+.cyber-btn {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    padding: 1rem;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+
+.cyber-btn:hover {
+    background: #00ff41;
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+}

@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="contact-container">
+    <div class="terminal-window">
+        
+        <div class="terminal-header">
+            <div class="status-dot blink"></div>
+            <h2>ESTABLISH UPLINK // COMM_CHANNEL_OPEN</h2>
+        </div>
+
+        <div class="uplink-section">
+            <h3>SELECT FREQUENCY</h3>
+            <div class="social-grid">
+                <a href="https://github.com/Jays-Network" target="_blank" class="social-node">
+                    <i class="fab fa-github"></i>
+                    <span>GITHUB</span>
+                </a>
+                <a href="#" class="social-node">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LINKEDIN</span>
+                </a>
+                <a href="#" class="social-node">
+                    <i class="fas fa-envelope"></i>
+                    <span>EMAIL</span>
+                </a>
+                <a href="#" class="social-node">
+                    <i class="fab fa-discord"></i>
+                    <span>DISCORD</span>
+                </a>
+            </div>
+        </div>
+
+        <hr class="neon-divider">
+
+        <form class="cyber-form" method="post">
+            {% csrf_token %}
+            <h3>TRANSMIT MESSAGE</h3>
+            
+            <div class="input-group">
+                <label>OPERATOR NAME</label>
+                <input type="text" placeholder="ENTER ID..." required>
+            </div>
+            
+            <div class="input-group">
+                <label>SUBJECT</label>
+                <input type="text" placeholder="ENCRYPTION KEY..." required>
+            </div>
+            
+            <div class="input-group">
+                <label>MESSAGE DATA</label>
+                <textarea rows="5" placeholder="AWAITING INPUT..." required></textarea>
+            </div>
+
+            <button type="submit" class="cyber-btn">
+                SEND TRANSMISSION <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}
