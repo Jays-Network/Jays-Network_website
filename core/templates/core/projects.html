@@ -1,44 +1,84 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="container" style="padding-top: 100px;">
+<div class="projects-container">
     
-    <div class="profile-header scroll-visible" style="opacity: 1; transform: none; margin-top: 2rem;">
-        <h1>ACTIVE PROJECTS</h1>
-        <div class="role">CLASSIFIED DEVELOPMENT</div>
+    <div class="terminal-header-large">
+        <div class="glitch-text">PROJECT_DATABASE</div>
+        <div class="sub-text">>> CLASSIFIED_DEVELOPMENT // ACCESS_GRANTED</div>
     </div>
 
-    <div id="projects-grid" class="scroll-hidden" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; width: 100%;">
-        
-        <div class="browser-card" style="min-height: 350px;">
-            <div class="browser-header">
-                <div class="window-controls"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-                <div class="url-bar">NexusComs.exe</div>
+    <div class="schematics-grid">
+
+        <div class="project-card">
+            <div class="card-status active">STATUS: ONLINE</div>
+            <div class="card-image">
+                <i class="fas fa-globe-americas"></i>
             </div>
-            <div class="browser-body" style="padding: 1.5rem;">
-                <h3 class="stack-title">NexusComs</h3>
-                <p class="bio-text">Secure communication platform with end-to-end encryption. Built for high-stakes environments.</p>
-                <div class="icons-row" style="font-size: 1.5rem; margin-bottom: 10px;">
-                    <i class="devicon-react-original colored"></i>
-                    <i class="devicon-nodejs-plain colored"></i>
+            <div class="card-body">
+                <h3>JAYS_NETWORK_V1</h3>
+                <p>Advanced portfolio interface with simulated CLI telemetry and secure contact uplinks.</p>
+                
+                <div class="tech-row">
+                    <i class="devicon-django-plain"></i>
+                    <i class="devicon-python-plain"></i>
+                    <i class="devicon-javascript-plain"></i>
                 </div>
-                <a href="#" class="social-btn" style="width: 100%; border-radius: 4px; margin-top: 10px;">VIEW SOURCE</a>
+
+                <div class="card-actions">
+                    <a href="https://github.com/Jays-Network" target="_blank" class="btn-action">
+                        <i class="fab fa-github"></i> SOURCE
+                    </a>
+                    <a href="#" class="btn-action primary">
+                        <i class="fas fa-eye"></i> DEPLOYED
+                    </a>
+                </div>
             </div>
         </div>
 
-        <div class="browser-card" style="min-height: 350px;">
-            <div class="browser-header">
-                <div class="window-controls"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-                <div class="url-bar">HomeLab_v2.sh</div>
+        <div class="project-card">
+            <div class="card-status warning">STATUS: MAINTENANCE</div>
+            <div class="card-image" style="color: #ffbd2e;">
+                <i class="fas fa-server"></i>
             </div>
-            <div class="browser-body" style="padding: 1.5rem;">
-                <h3 class="stack-title">Home Lab Cluster</h3>
-                <p class="bio-text">Proxmox-based HA cluster running custom automation scripts and network monitoring.</p>
-                <div class="icons-row" style="font-size: 1.5rem; margin-bottom: 10px;">
-                    <i class="devicon-linux-plain colored"></i>
-                    <i class="devicon-docker-plain colored"></i>
+            <div class="card-body">
+                <h3>PROXMOX_CLUSTER</h3>
+                <p>High-availability homelab orchestration using Proxmox, Ceph storage, and Docker containers.</p>
+                
+                <div class="tech-row">
+                    <i class="devicon-linux-plain"></i>
+                    <i class="devicon-docker-plain"></i>
+                    <i class="devicon-bash-plain"></i>
                 </div>
-                <a href="#" class="social-btn" style="width: 100%; border-radius: 4px; margin-top: 10px;">SYSTEM STATUS</a>
+
+                <div class="card-actions">
+                    <a href="#" class="btn-action">
+                        <i class="fab fa-github"></i> CONFIG
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="card-status active">STATUS: IN_DEV</div>
+            <div class="card-image" style="color: #7000ff;">
+                <i class="fas fa-comments"></i>
+            </div>
+            <div class="card-body">
+                <h3>NEXUS_COMS_APP</h3>
+                <p>Secure real-time communication platform built with React Native and Supabase.</p>
+                
+                <div class="tech-row">
+                    <i class="devicon-react-plain"></i>
+                    <i class="devicon-nodejs-plain"></i>
+                </div>
+
+                <div class="card-actions">
+                    <a href="#" class="btn-action">
+                        <i class="fab fa-github"></i> REPO
+                    </a>
+                </div>
             </div>
         </div>
 

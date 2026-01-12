@@ -246,7 +246,7 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
 
 /* --- THE FIX: THIS HIDES THE DUPLICATE TEXT --- */
 .btn-glitch {
-    display: none; 
+    display: none !important; /* Hides the duplicate text layer completely */ 
 }
 
 /* Hover Effects */
@@ -276,4 +276,140 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
 .uplink-btn:hover::after {
     opacity: 1;
     left: 130%;
+}
+
+/* --- PROJECT DATABASE STYLES --- */
+.projects-container {
+    padding: 120px 20px 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.terminal-header-large {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.glitch-text {
+    font-size: 2.5rem;
+    font-family: 'Orbitron', sans-serif;
+    color: #00f3ff;
+    text-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+    letter-spacing: 4px;
+}
+
+.sub-text {
+    color: #8892b0;
+    font-family: 'Fira Code', monospace;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+/* GRID LAYOUT */
+.schematics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* CARD DESIGN */
+.project-card {
+    background: rgba(10, 16, 26, 0.6); /* Semi-transparent dark */
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    border-radius: 6px;
+    position: relative;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.project-card:hover {
+    border-color: #00f3ff;
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.15);
+}
+
+/* CARD IMAGE (ICON AREA) */
+.card-image {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 4rem;
+    color: #00f3ff; /* Default icon color */
+}
+
+/* CARD TEXT */
+.card-body { padding: 1.5rem; }
+
+.card-body h3 {
+    color: #fff;
+    font-family: 'Orbitron';
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.card-body p {
+    color: #8892b0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    height: 40px; /* Keep cards even height */
+}
+
+/* BADGES */
+.card-status {
+    position: absolute;
+    top: 10px; right: 10px;
+    font-family: 'Fira Code';
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border: 1px solid;
+    border-radius: 3px;
+    background: rgba(0,0,0,0.8);
+}
+.active { color: #33ff00; border-color: #33ff00; }
+.warning { color: #ffbd2e; border-color: #ffbd2e; }
+
+/* TECH ICONS & BUTTONS */
+.tech-row {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    display: flex;
+    gap: 15px;
+    color: #ccc;
+}
+
+.card-actions { display: flex; gap: 10px; }
+
+.btn-action {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #333;
+    color: #ccc;
+    text-decoration: none;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+.btn-action:hover {
+    background: #fff;
+    color: #000;
+}
+
+.btn-action.primary {
+    border-color: #00f3ff;
+    color: #00f3ff;
+}
+
+.btn-action.primary:hover {
+    background: #00f3ff;
+    color: #000;
+    box-shadow: 0 0 15px rgba(0,243,255,0.4);
 }
