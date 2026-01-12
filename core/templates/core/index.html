@@ -11,6 +11,7 @@
 
     <div id="main-interface">
         <div class="container">
+            
             <div class="profile-header">
                 <img src="https://github.com/Jays-Network.png" alt="Jullian Jones" class="avatar">
                 <h1>Jay's-Networks</h1>
@@ -35,6 +36,7 @@
                             I'm <span class="highlight">self-taught</span> and dedicated to building new projects with a strong passion and drive.
                             Currently architecting solutions for <span class="highlight">Custom Communications</span> and managing advanced Home Lab infrastructure.
                         </p>
+                        
                         <div class="tech-stack">
                             <span class="stack-title">TECHNOLOGIES & TOOLS</span>
                             <div class="icons-row">
@@ -49,6 +51,7 @@
                                 <i class="fas fa-code" title="Replit/IDE" style="color: #F26207;"></i>
                             </div>
                         </div>
+
                         <div class="connect-section">
                             <span class="stack-title">CONNECT WITH ME</span>
                             <div class="action-area">
@@ -63,15 +66,43 @@
                 </div>
             </div>
 
-            <div class="terminal-card scroll-hidden" id="terminal-window">
-                <div class="terminal-header">
-                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
-                    <div class="terminal-title">Status Terminal</div>
-                </div>
-                <div class="terminal-body" id="terminal-content">
-                    <span class="cursor"></span>
-                </div>
+            <div class="scroll-hidden" id="terminal-window">
+                {% include 'core/includes/status_terminal.html' %}
             </div>
+
         </div>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Function to randomize CPU/RAM stats to look "alive"
+        function updateDashboard() {
+            const cpuNodes = document.querySelectorAll('.live-cpu');
+            const memNodes = document.querySelectorAll('.live-mem');
+            const bars = document.querySelectorAll('.animate-cpu');
+            const memBars = document.querySelectorAll('.animate-mem');
+
+            // Update CPU (Random between 2% and 15%)
+            cpuNodes.forEach((node, index) => {
+                const usage = Math.floor(Math.random() * (15 - 2 + 1) + 2);
+                node.innerText = usage + "%";
+                if(bars[index]) bars[index].style.width = usage + "%";
+            });
+
+            // Update RAM (Base values +/- 2%)
+            memNodes.forEach((node, index) => {
+                const base = index === 0 ? 73 : 75; // Mac vs Acer base load
+                const variance = Math.floor(Math.random() * 5) - 2; 
+                const final = base + variance;
+                
+                node.innerText = final + "%";
+                if(memBars[index]) memBars[index].style.width = final + "%";
+            });
+        }
+
+        // Run update every 3 seconds
+        setInterval(updateDashboard, 3000);
+    });
+    </script>
+
 {% endblock %}

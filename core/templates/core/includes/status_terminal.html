@@ -1,0 +1,95 @@
+<div class="terminal-card">
+    <div class="terminal-header">
+        <div class="window-controls">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+        </div>
+        <div class="terminal-title">root@jay-lab:~/dashboard</div>
+    </div>
+    
+    <div class="terminal-body" id="sys-terminal">
+        <div class="cmd-line">
+            <span style="color: #00f3ff;">root@jay-lab:~$</span> ./fetch_cluster_status.sh --live
+        </div>
+        
+        <div class="output-line">
+            > ESTABLISHING SECURE TUNNEL TO <span class="highlight">HOME_LAB_MAIN</span>... <span class="success">[CONNECTED]</span>
+        </div>
+        <br>
+
+        <div class="telemetry-grid">
+            
+            <div class="tele-col">
+                <span class="tele-header">[[ INFRASTRUCTURE ]]</span>
+                
+                <div class="node-box">
+                    <div class="stat-row">
+                        <span class="label">NODE:</span> <span class="val highlight">PROXMOX_MAC</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="label">VMS/LXC:</span> <span class="val">2 / 5</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="label">CPU:</span> 
+                        <div class="bar-container"><div class="bar-fill animate-cpu" style="width: 7%;"></div></div>
+                        <span class="val small live-cpu">7%</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="label">MEM:</span> 
+                        <div class="bar-container"><div class="bar-fill animate-mem" style="width: 73%;"></div></div>
+                        <span class="val small live-mem">73%</span>
+                    </div>
+                </div>
+
+                <div class="node-box" style="margin-top: 10px;">
+                    <div class="stat-row">
+                        <span class="label">NODE:</span> <span class="val highlight">PROXMOX_ACER</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="label">CPU:</span> 
+                        <div class="bar-container"><div class="bar-fill animate-cpu" style="width: 2%;"></div></div>
+                        <span class="val small live-cpu">2%</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="label">MEM:</span> 
+                        <div class="bar-container"><div class="bar-fill animate-mem" style="width: 75%;"></div></div>
+                        <span class="val small live-mem">75%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tele-col">
+                <span class="tele-header">[[ SERVICES ]]</span>
+                
+                <div class="service-row">
+                    <span class="label">NGINX_PROXY:</span> <span class="success">ONLINE</span>
+                </div>
+                <div class="service-row">
+                    <span class="label">HOME_ASSISTANT:</span> <span class="success">ONLINE</span>
+                </div>
+                <div class="service-row">
+                    <span class="label">JELLYFIN_MEDIA:</span> <span class="success">STREAMING</span>
+                </div>
+                <div class="service-row">
+                    <span class="label">PI_HOLE_DNS:</span> <span class="success">PROTECTED</span>
+                </div>
+                
+                <br>
+                <span class="tele-header">[[ STORAGE ]]</span>
+                <div class="stat-row">
+                    <span class="label">NAS_VOL_1:</span> <span class="val">14.2 TB USED</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">HEALTH:</span> <span class="success">[ZFS_OK]</span>
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+        <div class="cmd-line">
+            <span class="cursor blink">_</span>
+        </div>
+    </div>
+</div>
