@@ -5,16 +5,20 @@ from django.contrib import messages
 
 def send_telegram_message(message):
     """
-    Fetches credentials from settings (loaded from .env) 
-    and fires the message to your Telegram Group.
+    Fetches credentials from settings (loaded from .env), cleans them,
+    and fires the message to your Telegram Group safely.
     """
     token = settings.TELEGRAM_BOT_TOKEN
     chat_id = settings.TELEGRAM_CHAT_ID
 
-    # Safety Check: Warn in console if keys are missing
+    # 1. Safety Check: Warn in console if keys are missing
     if not token or not chat_id:
         print("⚠️ ERROR: Telegram credentials missing in settings/.env")
         return
+
+    # 2. THE FIX: Remove invisible newlines/spaces that cause crashes
+    token = str(token).strip()
+    chat_id = str(chat_id).strip()
 
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     payload = {
@@ -24,9 +28,12 @@ def send_telegram_message(message):
     }
     
     try:
-        requests.post(url, json=payload)
+        # 3. Add timeout (5s) and check for HTTP errors (like 401 Unauthorized)
+        response = requests.post(url, json=payload, timeout=5)
+        response.raise_for_status() 
     except Exception as e:
-        print(f"Error sending transmission: {e}")
+        # 4. Crash Prevention: Log the error but keep the website running!
+        print(f"❌ UPLINK FAILED: {e}")
 
 def index(request):
     return render(request, 'core/index.html')
@@ -49,7 +56,7 @@ def contact(request):
             f"📝 *Payload:* \n{msg_body}"
         )
 
-        # 3. Fire the Uplink function
+        # 3. Fire the protected Uplink function
         send_telegram_message(formatted_message)
 
         # 4. Show success message on the website
