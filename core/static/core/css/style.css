@@ -209,11 +209,10 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
     box-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
 }
 
-/* --- UPLINK GLASS BUTTON (UPDATED) --- */
+/* --- ACTION AREA & UPLINK BUTTON (FIXED) --- */
 .action-area {
     margin-top: 2rem;
-    /* Keeps it aligned with the text above it */
-    text-align: left; 
+    text-align: left;
 }
 
 .terminal-text {
@@ -230,41 +229,31 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
     align-items: center;
     justify-content: center;
     padding: 1rem 3rem;
-    
-    /* GLASS EFFECT */
-    background: rgba(0, 243, 255, 0.05); /* Very sheer cyan */
+    background: rgba(0, 243, 255, 0.05);
     border: 1px solid rgba(0, 243, 255, 0.3);
-    backdrop-filter: blur(8px); /* Blurs whatever is behind it */
-    -webkit-backdrop-filter: blur(8px); /* Safari support */
-    
-    /* FONT & TEXT */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     color: #00f3ff;
     font-family: 'Orbitron', sans-serif;
     font-weight: 700;
     text-decoration: none;
     letter-spacing: 2px;
     text-transform: uppercase;
-    
-    /* ANIMATION BASE */
     transition: all 0.4s ease;
-    overflow: hidden; /* Contains the light shine effect */
+    overflow: hidden;
 }
 
-/* Hide the extra glitch text for a clean glass look */
+/* --- THE FIX: THIS HIDES THE DUPLICATE TEXT --- */
 .btn-glitch {
-    display: none;
+    display: none; 
 }
 
-/* --- HOVER INTERACTIVITY --- */
+/* Hover Effects */
 .uplink-btn:hover {
-    /* Brighter background and border */
     background: rgba(0, 243, 255, 0.2);
     border-color: #00f3ff;
-    /* Outer glow and inner glow */
     box-shadow: 0 0 35px rgba(0, 243, 255, 0.6), inset 0 0 15px rgba(0, 243, 255, 0.4);
-    /* Text turns white */
     color: #ffffff;
-    /* Slight lift effect */
     transform: translateY(-3px);
 }
 
@@ -285,5 +274,5 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
 
 .uplink-btn:hover::after {
     opacity: 1;
-    left: 130%; /* Moves the shine across the button */
+    left: 130%;
 }
