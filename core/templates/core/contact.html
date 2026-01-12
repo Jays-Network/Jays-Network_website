@@ -7,53 +7,49 @@
         
         <div class="terminal-header">
             <div class="status-dot blink"></div>
-            <h2>ESTABLISH UPLINK // COMM_CHANNEL_OPEN</h2>
+            <h2>SECURE UPLINK ESTABLISHED // SELECT_FREQUENCY</h2>
         </div>
 
-        <div class="uplink-section">
-            <h3>SELECT FREQUENCY</h3>
-            <div class="social-grid">
-                <a href="https://github.com/Jays-Network" target="_blank" class="social-node">
-                    <i class="fab fa-github"></i>
-                    <span>GITHUB</span>
-                </a>
-                <a href="#" class="social-node">
-                    <i class="fab fa-linkedin"></i>
-                    <span>LINKEDIN</span>
-                </a>
-                <a href="#" class="social-node">
-                    <i class="fas fa-envelope"></i>
-                    <span>EMAIL</span>
-                </a>
-                <a href="#" class="social-node">
-                    <i class="fab fa-discord"></i>
-                    <span>DISCORD</span>
-                </a>
-            </div>
+        <div class="frequency-grid">
+            <a href="https://github.com/Jays-Network" target="_blank" class="freq-node">
+                <i class="fab fa-github"></i>
+                <span>GITHUB_REPO</span>
+            </a>
+            <a href="#" class="freq-node">
+                <i class="fab fa-linkedin"></i>
+                <span>LINKEDIN_SIGNAL</span>
+            </a>
+            <a href="#" class="freq-node">
+                <i class="fab fa-discord"></i>
+                <span>DISCORD_SERVER</span>
+            </a>
+            <a href="#" class="freq-node">
+                <i class="fas fa-envelope"></i>
+                <span>ENCRYPTED_MAIL</span>
+            </a>
         </div>
 
         <hr class="neon-divider">
 
         <form class="cyber-form" method="post">
             {% csrf_token %}
-            <h3>TRANSMIT MESSAGE</h3>
-            
-            <div class="input-group">
-                <label>OPERATOR NAME</label>
-                <input type="text" placeholder="ENTER ID..." required>
+            <div class="input-row">
+                <div class="input-group">
+                    <label>OPERATOR_ID</label>
+                    <input type="text" placeholder="ENTER NAME..." required>
+                </div>
+                <div class="input-group">
+                    <label>SUBJECT_HEADER</label>
+                    <input type="text" placeholder="TOPIC..." required>
+                </div>
             </div>
             
             <div class="input-group">
-                <label>SUBJECT</label>
-                <input type="text" placeholder="ENCRYPTION KEY..." required>
-            </div>
-            
-            <div class="input-group">
-                <label>MESSAGE DATA</label>
-                <textarea rows="5" placeholder="AWAITING INPUT..." required></textarea>
+                <label>TRANSMISSION_DATA</label>
+                <textarea rows="5" placeholder="TYPE MESSAGE HERE..." required></textarea>
             </div>
 
-            <button type="submit" class="cyber-btn">
+            <button type="submit" class="cyber-btn-submit">
                 SEND TRANSMISSION <i class="fas fa-paper-plane"></i>
             </button>
         </form>

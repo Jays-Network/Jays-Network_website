@@ -114,116 +114,59 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
 .cursor { display: inline-block; width: 8px; height: 16px; background: var(--terminal-green); animation: blink 1s infinite; vertical-align: middle; }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* --- CONTACT TERMINAL STYLES --- */
+/* --- NEW CONTACT TERMINAL --- */
 .contact-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 85vh;
+    min-height: 80vh;
     padding: 2rem;
-    position: relative;
-    z-index: 10;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 .terminal-window {
-    background: rgba(10, 10, 20, 0.85); /* Dark Glass */
-    border: 1px solid #00f3ff; /* Cyan Border */
-    box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+    background: rgba(10, 16, 26, 0.9);
+    border: 1px solid #00f3ff;
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.15);
     padding: 2.5rem;
     width: 100%;
-    max-width: 700px;
+    max-width: 800px;
     backdrop-filter: blur(10px);
-    clip-path: polygon(
-        0 0, 
-        100% 0, 
-        100% 95%, 
-        95% 100%, 
-        0 100%
-    ); /* Sci-fi corner cut */
+    position: relative;
 }
 
-/* Header with Blinking Dot */
-.terminal-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid rgba(0, 243, 255, 0.3);
-    padding-bottom: 1rem;
-}
-
-.terminal-header h2 {
-    color: #00f3ff;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-    margin: 0;
-}
-
-.status-dot {
-    width: 12px;
-    height: 12px;
-    background: #00ff41; /* Hacker Green */
-    border-radius: 50%;
-    box-shadow: 0 0 10px #00ff41;
-}
-
-.blink {
-    animation: blinker 1.5s linear infinite;
-}
-
-@keyframes blinker {
-    50% { opacity: 0; }
-}
-
-/* Social Uplink Grid */
-.social-grid {
+/* Social "Frequency" Grid */
+.frequency-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
 }
 
-.social-node {
+.freq-node {
     display: flex;
     flex-direction: column;
     align-items: center;
     background: rgba(0, 243, 255, 0.05);
-    border: 1px solid rgba(0, 243, 255, 0.2);
-    padding: 1rem;
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    padding: 1.5rem;
     color: #fff;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
-.social-node i {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-    color: #00f3ff;
-}
+.freq-node i { font-size: 2rem; margin-bottom: 0.5rem; color: #00f3ff; }
+.freq-node span { font-size: 0.7rem; font-family: 'Fira Code', monospace; letter-spacing: 1px; }
 
-.social-node span {
-    font-family: 'Fira Code', monospace;
-    font-size: 0.8rem;
-}
-
-.social-node:hover {
+.freq-node:hover {
     background: rgba(0, 243, 255, 0.2);
     box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
-    transform: translateY(-3px);
+    transform: translateY(-5px);
 }
 
-/* Cyber Form Inputs */
-.cyber-form h3, .uplink-section h3 {
-    color: #fff;
-    font-family: 'Orbitron', sans-serif;
-    margin-bottom: 1.5rem;
-    font-size: 1rem;
-}
-
-.input-group {
-    margin-bottom: 1.5rem;
-}
+/* Contact Form Inputs */
+.input-row { display: flex; gap: 1rem; }
+.input-group { margin-bottom: 1.5rem; flex: 1; }
 
 .input-group label {
     display: block;
@@ -233,42 +176,69 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
     margin-bottom: 0.5rem;
 }
 
-.input-group input, 
-.input-group textarea {
+.input-group input, .input-group textarea {
     width: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    border-bottom: 2px solid #333;
-    color: #fff;
-    padding: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #333;
+    color: #00f3ff;
+    padding: 12px;
     font-family: 'Inter', sans-serif;
+}
+
+.input-group input:focus, .input-group textarea:focus {
+    outline: none;
+    border-color: #00f3ff;
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+.cyber-btn-submit {
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    border: 1px solid #00f3ff;
+    color: #00f3ff;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    font-weight: bold;
     transition: 0.3s;
 }
 
-.input-group input:focus, 
-.input-group textarea:focus {
-    outline: none;
-    border-bottom: 2px solid #00f3ff;
-    background: rgba(0, 243, 255, 0.05);
+.cyber-btn-submit:hover {
+    background: #00f3ff;
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
 }
 
-/* Button */
-.cyber-btn {
-    width: 100%;
-    background: transparent;
-    border: 1px solid #00ff41;
-    color: #00ff41;
-    padding: 1rem;
+/* --- THE MAIN PAGE UPLINK BUTTON --- */
+.action-area {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.terminal-text {
+    color: #888;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.uplink-btn {
+    position: relative;
+    display: inline-block;
+    padding: 15px 40px;
+    color: #00f3ff;
+    text-decoration: none;
+    text-transform: uppercase;
     font-family: 'Orbitron', sans-serif;
     font-weight: bold;
-    cursor: pointer;
-    text-transform: uppercase;
     letter-spacing: 2px;
+    border: 1px solid #00f3ff;
+    overflow: hidden;
     transition: 0.3s;
 }
 
-.cyber-btn:hover {
-    background: #00ff41;
-    color: #000;
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+.uplink-btn:hover {
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.8);
 }
