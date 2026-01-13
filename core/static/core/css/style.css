@@ -542,3 +542,70 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
 @media (max-width: 600px) {
     .system-footer { gap: 1rem; flex-direction: column; text-align: center; }
 }
+
+/* --- RESPONSIVE LAYOUT SYSTEM --- */
+
+/* 1. TABLET & SMALL LAPTOPS (Max Width: 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 1rem;
+        max-width: 95%; /* Use more screen space */
+    }
+    
+    .schematics-grid {
+        gap: 1.5rem; /* Reduce gaps between cards */
+    }
+}
+
+/* 2. MOBILE PHONES (Max Width: 768px) */
+@media (max-width: 768px) {
+    /* Adjust the Navigation to not overlap */
+    .contact-container, .projects-container {
+        margin-top: 100px; 
+        padding-top: 20px;
+    }
+
+    /* Force Grid to 1 Column */
+    .schematics-grid, .frequency-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Stack the Certificate Cards (Icon Top, Text Bottom) */
+    .cert-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .cert-icon {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 189, 46, 0.3); /* Gold separator horizontal */
+        padding-right: 0;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+
+    /* Make text readable on small screens */
+    h1 { font-size: 2.2rem; }
+    .glitch-text { font-size: 1.8rem; }
+    
+    /* System Footer Stacking */
+    .system-footer {
+        flex-direction: column;
+        gap: 10px;
+        padding-bottom: 30px; /* Space for mobile browser bars */
+    }
+}
+
+/* 3. TINY PHONES (iPhone SE / Fold - Max Width: 380px) */
+@media (max-width: 380px) {
+    .nav-link {
+        font-size: 0.7rem; /* Shrink menu text */
+        padding: 5px 8px;
+    }
+    
+    .project-card, .cert-card {
+        margin: 0 -10px; /* Pull cards to edges to maximize space */
+    }
+}
