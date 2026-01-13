@@ -511,3 +511,34 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
     .cert-card { flex-direction: column; text-align: center; }
     .cert-icon { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-right: 0; padding-bottom: 1rem; margin-bottom: 1rem; }
 }
+
+/* --- GLOBAL FOOTER --- */
+.system-footer {
+    width: 100%;
+    background: rgba(5, 5, 5, 0.9);
+    border-top: 1px solid rgba(0, 243, 255, 0.2);
+    padding: 15px 0;
+    margin-top: auto; /* Pushes to bottom if content is short */
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    color: #555;
+    position: relative;
+    z-index: 100;
+}
+
+.footer-col {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-col i { color: #33ff00; }
+.footer-col:hover { color: #00f3ff; text-shadow: 0 0 5px #00f3ff; cursor: default; }
+
+/* Mobile adjust */
+@media (max-width: 600px) {
+    .system-footer { gap: 1rem; flex-direction: column; text-align: center; }
+}
