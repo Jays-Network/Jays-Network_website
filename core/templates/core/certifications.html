@@ -1,0 +1,69 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="projects-container">
+    
+    <div class="terminal-header-large">
+        <div class="glitch-text" style="color: #ffbd2e; text-shadow: 0 0 15px rgba(255, 189, 46, 0.4);">
+            CREDENTIALS_DB
+        </div>
+        <div class="sub-text">>> PERSONNEL_RECORDS // VERIFIED_SKILLS</div>
+    </div>
+
+    <div class="schematics-grid">
+
+        <div class="cert-card">
+            <div class="cert-icon">
+                <i class="fas fa-certificate"></i>
+            </div>
+            <div class="cert-body">
+                <div class="cert-issuer">UDEMY / META</div>
+                <h3>Advanced React Native</h3>
+                <div class="cert-date">ISSUED: DEC 2025</div>
+                
+                <div class="cert-badge verified">
+                    <i class="fas fa-check-circle"></i> VERIFIED
+                </div>
+
+                <a href="#" target="_blank" class="cert-link">VIEW DOCUMENT</a>
+            </div>
+        </div>
+
+        <div class="cert-card">
+            <div class="cert-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="cert-body">
+                <div class="cert-issuer">GOOGLE</div>
+                <h3>Cybersecurity Foundations</h3>
+                <div class="cert-date">ISSUED: NOV 2025</div>
+                
+                <div class="cert-badge verified">
+                    <i class="fas fa-check-circle"></i> VERIFIED
+                </div>
+
+                <a href="#" target="_blank" class="cert-link">VIEW DOCUMENT</a>
+            </div>
+        </div>
+
+        <div class="cert-card">
+            <div class="cert-icon">
+                <i class="fas fa-code"></i>
+            </div>
+            <div class="cert-body">
+                <div class="cert-issuer">FREECODECAMP</div>
+                <h3>Responsive Web Design</h3>
+                <div class="cert-date">ISSUED: OCT 2025</div>
+                
+                <div class="cert-badge verified">
+                    <i class="fas fa-check-circle"></i> VERIFIED
+                </div>
+
+                <a href="#" target="_blank" class="cert-link">VIEW DOCUMENT</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

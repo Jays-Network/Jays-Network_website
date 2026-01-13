@@ -41,6 +41,9 @@ def index(request):
 def projects(request):
     return render(request, 'core/projects.html')
 
+def certifications(request):
+    return render(request, 'core/certifications.html')
+
 def contact(request):
     if request.method == 'POST':
         # 1. Capture the form data from the HTML inputs

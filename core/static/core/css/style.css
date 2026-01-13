@@ -413,3 +413,101 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
     color: #000;
     box-shadow: 0 0 15px rgba(0,243,255,0.4);
 }
+
+/* --- CERTIFICATIONS / CREDENTIALS --- */
+
+.cert-card {
+    background: rgba(10, 16, 26, 0.8);
+    border: 1px solid rgba(255, 189, 46, 0.3); /* Gold border */
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    transition: 0.3s ease;
+    backdrop-filter: blur(5px);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Effect: Gold Glow */
+.cert-card:hover {
+    transform: translateX(5px);
+    border-color: #ffbd2e;
+    box-shadow: 0 0 20px rgba(255, 189, 46, 0.15);
+    background: rgba(255, 189, 46, 0.05);
+}
+
+/* Left Icon Box */
+.cert-icon {
+    font-size: 2.5rem;
+    color: #ffbd2e;
+    min-width: 60px;
+    text-align: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    padding-right: 1.5rem;
+}
+
+.cert-body { flex: 1; }
+
+.cert-issuer {
+    color: #8892b0;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.cert-body h3 {
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.cert-date {
+    color: #555;
+    font-size: 0.7rem;
+    margin-bottom: 1rem;
+    font-family: 'Fira Code';
+}
+
+/* "Verified" Stamp */
+.cert-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.verified {
+    background: rgba(51, 255, 0, 0.1);
+    color: #33ff00;
+    border: 1px solid #33ff00;
+}
+
+/* View Link */
+.cert-link {
+    display: block;
+    font-size: 0.75rem;
+    color: #ffbd2e;
+    text-decoration: none;
+    font-family: 'Orbitron';
+    margin-top: 5px;
+    transition: 0.3s;
+}
+
+.cert-link:hover {
+    color: #fff;
+    text-shadow: 0 0 10px #ffbd2e;
+    letter-spacing: 1px;
+}
+
+/* Mobile Stack */
+@media (max-width: 600px) {
+    .cert-card { flex-direction: column; text-align: center; }
+    .cert-icon { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-right: 0; padding-bottom: 1rem; margin-bottom: 1rem; }
+}
