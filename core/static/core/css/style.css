@@ -559,18 +559,46 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
 
 /* 2. MOBILE PHONES (Max Width: 768px) */
 @media (max-width: 768px) {
-    /* Adjust the Navigation to not overlap */
+    
+    /* --- NAVBAR: UN-STICK IT --- */
+    .nav-bar {
+        /* This makes the navbar part of the page flow, not floating over it */
+        position: relative; 
+        top: auto;
+        
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 15px 5px;
+        background: #050505; /* Solid background matches body */
+        border-bottom: 1px solid #00f3ff;
+    }
+
+    .nav-link {
+        font-size: 0.7rem; 
+        padding: 8px 12px;
+        margin: 2px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+    }
+
+    /* --- RESET CONTENT MARGINS --- */
+    /* Since navbar is no longer floating, we don't need huge top margins */
     .contact-container, .projects-container {
-        margin-top: 100px; 
-        padding-top: 20px;
+        margin-top: 20px !important; 
+        padding-top: 0;
+        min-height: auto; /* Allow height to adjust naturally */
     }
 
-    /* Force Grid to 1 Column */
-    .schematics-grid, .frequency-grid {
+    .profile-header {
+        margin-top: 20px !important;
+    }
+
+    /* --- GRID & CARD FIXES --- */
+    .schematics-grid, .frequency-grid, .telemetry-grid {
         grid-template-columns: 1fr !important;
+        gap: 2rem;
     }
 
-    /* Stack the Certificate Cards (Icon Top, Text Bottom) */
     .cert-card {
         flex-direction: column;
         text-align: center;
@@ -579,33 +607,20 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
 
     .cert-icon {
         border-right: none;
-        border-bottom: 1px solid rgba(255, 189, 46, 0.3); /* Gold separator horizontal */
+        border-bottom: 1px solid rgba(255, 189, 46, 0.3);
         padding-right: 0;
         padding-bottom: 1rem;
         margin-bottom: 1rem;
         width: 100%;
     }
 
-    /* Make text readable on small screens */
-    h1 { font-size: 2.2rem; }
-    .glitch-text { font-size: 1.8rem; }
+    /* --- TEXT SIZING --- */
+    h1 { font-size: 1.8rem; line-height: 1.2; }
+    .glitch-text { font-size: 1.5rem; }
     
-    /* System Footer Stacking */
     .system-footer {
         flex-direction: column;
         gap: 10px;
-        padding-bottom: 30px; /* Space for mobile browser bars */
-    }
-}
-
-/* 3. TINY PHONES (iPhone SE / Fold - Max Width: 380px) */
-@media (max-width: 380px) {
-    .nav-link {
-        font-size: 0.7rem; /* Shrink menu text */
-        padding: 5px 8px;
-    }
-    
-    .project-card, .cert-card {
-        margin: 0 -10px; /* Pull cards to edges to maximize space */
+        padding-bottom: 40px;
     }
 }
