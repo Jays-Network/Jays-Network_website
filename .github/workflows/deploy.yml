@@ -21,11 +21,20 @@ jobs:
           source /home/jay/jays_network/venv/bin/activate
           python manage.py migrate
 
-      - name: Collect Static Files
+      - name: Clear and Collect Static Files
         run: |
           source /home/jay/jays_network/venv/bin/activate
-          python manage.py collectstatic --noinput
+          # Use --clear to ensure no old/broken files remain
+          python manage.py collectstatic --noinput --clear
 
       - name: Restart Website
         run: |
+          # Ensure 'jay' is in sudoers for this specific command
           sudo systemctl restart gunicorn
+
+      - name: Smoke Test (Verify Uptime)
+        run: |
+          # Wait 3 seconds for Gunicorn to spin up
+          sleep 3
+          # Check if local port 8000 returns a 200 OK
+          curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000 | grep "200"
