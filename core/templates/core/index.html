@@ -20,69 +20,73 @@
                 <div style="color: #00ff88; font-size: 0.8rem; font-family: 'Orbitron'; margin-top: 10px;">● SYSTEMS ONLINE</div>
             </div>
 
-            <div class="security-monitor">
-                <div class="security-header">
-                    <span><i class="fas fa-satellite-dish blink"></i> LIVE_THREAT_FEED</span>
-                    <span style="font-size: 0.7rem;">STATUS: <span style="color: #33ff00;">ACTIVE_DEFENSE</span></span>
-                </div>
+            <div class="dashboard-grid">
                 
-                <div id="attack-list">
-                    <p style="color: #555; padding: 10px;">>> ESTABLISHING SECURE UPLINK...</p>
-                </div>
-            </div>
-
-            <div class="browser-card scroll-hidden" id="browser-window">
-                <div class="browser-header">
-                    <div class="window-controls"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-                    <div class="url-bar"><i class="fas fa-lock" style="font-size: 0.7rem; margin-right:5px; color:#27c93f;"></i> secure://jays-network/profile</div>
-                </div>
-                <div class="browser-body">
-                    <div id="browser-loader">
-                        <i class="fas fa-database fa-spin fa-3x"></i>
-                        <div class="scanning-text">ACCESSING ENCRYPTED PROFILE DATA...</div>
+                <div class="browser-card scroll-hidden" id="browser-window">
+                    <div class="browser-header">
+                        <div class="window-controls"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                        <div class="url-bar"><i class="fas fa-lock" style="font-size: 0.7rem; margin-right:5px; color:#27c93f;"></i> secure://jays-network/profile</div>
                     </div>
-                    <div id="browser-content-container" style="display: none; opacity: 0;">
-                        <h3 class="stack-title">ABOUT ME</h3>
-                        <p class="bio-text">
-                            I am an up-and-coming <span class="highlight">Full Stack programmer</span> and software engineer. 
-                            I'm <span class="highlight">self-taught</span> and dedicated to building new projects with a strong passion and drive.
-                            Currently architecting solutions for <span class="highlight">Custom Communications</span> and managing advanced Home Lab infrastructure.
-                        </p>
+                    <div class="browser-body">
+                        <div id="browser-loader">
+                            <i class="fas fa-database fa-spin fa-3x"></i>
+                            <div class="scanning-text">ACCESSING ENCRYPTED PROFILE DATA...</div>
+                        </div>
+                        <div id="browser-content-container" style="display: none; opacity: 0;">
+                            <h3 class="stack-title">ABOUT ME</h3>
+                            <p class="bio-text">
+                                I am an up-and-coming <span class="highlight">Full Stack programmer</span> and software engineer. 
+                                I'm <span class="highlight">self-taught</span> and dedicated to building new projects with a strong passion and drive.
+                                Currently architecting solutions for <span class="highlight">Custom Communications</span> and managing advanced Home Lab infrastructure.
+                            </p>
+                            
+                            <div class="tech-stack">
+                                <span class="stack-title">TECHNOLOGIES & TOOLS</span>
+                                <div class="icons-row">
+                                    <i class="devicon-python-plain colored" title="Python"></i>
+                                    <i class="devicon-typescript-plain colored" title="TypeScript"></i>
+                                    <i class="devicon-javascript-plain colored" title="JavaScript"></i>
+                                    <i class="devicon-csharp-plain colored" title="C#"></i>
+                                    <i class="devicon-kotlin-plain colored" title="Kotlin"></i>
+                                    <i class="devicon-postgresql-plain colored" title="PostgreSQL"></i>
+                                    <i class="devicon-debian-plain colored" title="Debian"></i>
+                                    <i class="devicon-yaml-plain colored" title="YAML"></i>
+                                    <i class="fas fa-code" title="Replit/IDE" style="color: #F26207;"></i>
+                                </div>
+                            </div>
+
+                            <div class="connect-section">
+                                <span class="stack-title">CONNECT WITH ME</span>
+                                <div class="action-area">
+                                    <p class="terminal-text">ESTABLISH COMMUNICATION:</p>
+                                    <a href="{% url 'contact' %}" class="uplink-btn">
+                                        <span class="btn-text">INITIALIZE UPLINK</span>
+                                        <span class="btn-glitch" aria-hidden="true">INITIALIZE UPLINK</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-sidebar">
+                    
+                    <div class="security-monitor">
+                        <div class="security-header">
+                            <span><i class="fas fa-satellite-dish blink"></i> LIVE_THREAT_FEED</span>
+                            <span style="font-size: 0.7rem;">STATUS: <span style="color: #33ff00;">ACTIVE_DEFENSE</span></span>
+                        </div>
                         
-                        <div class="tech-stack">
-                            <span class="stack-title">TECHNOLOGIES & TOOLS</span>
-                            <div class="icons-row">
-                                <i class="devicon-python-plain colored" title="Python"></i>
-                                <i class="devicon-typescript-plain colored" title="TypeScript"></i>
-                                <i class="devicon-javascript-plain colored" title="JavaScript"></i>
-                                <i class="devicon-csharp-plain colored" title="C#"></i>
-                                <i class="devicon-kotlin-plain colored" title="Kotlin"></i>
-                                <i class="devicon-postgresql-plain colored" title="PostgreSQL"></i>
-                                <i class="devicon-debian-plain colored" title="Debian"></i>
-                                <i class="devicon-yaml-plain colored" title="YAML"></i>
-                                <i class="fas fa-code" title="Replit/IDE" style="color: #F26207;"></i>
-                            </div>
-                        </div>
-
-                        <div class="connect-section">
-                            <span class="stack-title">CONNECT WITH ME</span>
-                            <div class="action-area">
-                                <p class="terminal-text">ESTABLISH COMMUNICATION:</p>
-                                <a href="{% url 'contact' %}" class="uplink-btn">
-                                    <span class="btn-text">INITIALIZE UPLINK</span>
-                                    <span class="btn-glitch" aria-hidden="true">INITIALIZE UPLINK</span>
-                                </a>
-                            </div>
+                        <div id="attack-list">
+                            <p style="color: #555; padding: 10px;">>> ESTABLISHING SECURE UPLINK...</p>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="scroll-hidden" id="terminal-window">
-                {% include 'core/includes/status_terminal.html' %}
-            </div>
+                    <div class="scroll-hidden" id="terminal-window">
+                        {% include 'core/includes/status_terminal.html' %}
+                    </div>
 
-        </div>
+                </div> </div> </div>
     </div>
 
     <script>
