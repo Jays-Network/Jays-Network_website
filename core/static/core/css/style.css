@@ -641,3 +641,55 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
     box-shadow: 0 0 40px rgba(0, 243, 255, 0.6); /* Brighter glow */
 }
 
+/* --- LIVE SECURITY FEED --- */
+.security-monitor {
+    background: rgba(5, 5, 5, 0.95);
+    border: 1px solid #33ff00; /* Hacker Green Border */
+    border-radius: 4px;
+    padding: 1.5rem;
+    font-family: 'Fira Code', monospace;
+    box-shadow: 0 0 15px rgba(51, 255, 0, 0.1);
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.security-header {
+    border-bottom: 1px solid rgba(51, 255, 0, 0.3);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #33ff00;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+#attack-list {
+    height: 200px;
+    overflow-y: auto; /* Allow scrolling */
+    scrollbar-width: thin;
+    scrollbar-color: #33ff00 #050505;
+}
+
+/* Individual Log Entries */
+.threat-entry {
+    font-size: 0.8rem;
+    padding: 6px 0;
+    border-left: 2px solid transparent;
+    transition: 0.2s;
+    display: flex;
+    gap: 10px;
+}
+
+.threat-entry:hover {
+    background: rgba(51, 255, 0, 0.05);
+    border-left: 2px solid #33ff00;
+    padding-left: 10px;
+}
+
+.log-time { color: #555; }
+.log-action { color: #ff3333; font-weight: bold; } /* Red for BLOCKED */
+.log-ip { color: #fff; }
+.log-target { color: #ffbd2e; } /* Gold for path */

@@ -67,3 +67,19 @@ def contact(request):
         return redirect('contact')
 
     return render(request, 'core/contact.html')
+
+    from django.shortcuts import render
+import os # <--- Make sure you import os
+
+def index(request):
+    # Get keys from .env
+    supabase_url = os.environ.get('SUPABASE_URL')
+    supabase_key = os.environ.get('SUPABASE_KEY')
+
+    context = {
+        'supabase_url': supabase_url,
+        'supabase_key': supabase_key,
+    }
+    return render(request, 'core/index.html', context)
+
+# ... keep your other views (projects, contact, certifications) as they are ...
