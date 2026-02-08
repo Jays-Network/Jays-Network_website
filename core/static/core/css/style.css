@@ -35,25 +35,27 @@ body {
     background-size: 40px 40px; z-index: -1; pointer-events: none;
 }
 
-/* --- NAVIGATION BAR (OPTION 2: GLASS HUD) --- */
+/* --- NAVIGATION BAR (FIXED: HIGH CONTRAST HUD) --- */
 .nav-bar {
     position: fixed; 
     top: 0; 
     width: 100%; 
-    padding: 15px 0; /* Slightly compact */
+    padding: 15px 0;
     z-index: 1000;
     display: flex; 
     justify-content: center; 
     gap: 40px;
     
-    /* GLASS EFFECT */
-    background: rgba(5, 5, 5, 0.95); /* Semi-transparent dark */
-    backdrop-filter: blur(12px);     /* Blurs whatever is behind it */
-    -webkit-backdrop-filter: blur(12px); /* Safari support */
+    /* THE FIX: Darker background (95% solid) blocks the text behind it */
+    background: rgba(5, 5, 5, 0.95); 
     
-    /* Cyber Border at bottom */
-    border-bottom: 1px solid rgba(0, 243, 255, 0.15);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    /* Stronger Blur */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    
+    /* Stronger Neon Line to separate header from content */
+    border-bottom: 2px solid rgba(0, 242, 255, 0.2);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
 }
 
 .nav-link {
@@ -109,6 +111,9 @@ body {
     display: flex; 
     flex-direction: column; 
     gap: 40px; /* Reduced gap since grid handles spacing */
+    
+    /* FIX: Push content down so it clears the fixed navbar */
+    margin-top: 8rem;
 }
 
 /* --- NEW DASHBOARD GRID LAYOUT --- */
@@ -128,7 +133,11 @@ body {
 }
 
 /* --- COMPONENT STYLES --- */
-.profile-header { margin-top: 5rem; margin-bottom: 2rem; opacity: 0; transform: translateY(30px); transition: all 1s ease; }
+.profile-header { 
+    /* Removed large margin-top since .container handles it now */
+    margin-bottom: 2rem; 
+    opacity: 0; transform: translateY(30px); transition: all 1s ease; 
+}
 .avatar { width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--primary); box-shadow: 0 0 30px rgba(0, 242, 255, 0.3); margin-bottom: 1.5rem; animation: float 6s ease-in-out infinite; }
 h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; background: linear-gradient(90deg, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; text-transform: uppercase; text-shadow: 0 0 20px rgba(0,242,255,0.2); }
 .role { font-family: 'Orbitron', sans-serif; color: var(--secondary); font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 1rem; }
@@ -197,7 +206,10 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
     align-items: center;
     min-height: 80vh;
     padding: 2rem;
-    margin-top: 80px;
+    
+    /* FIX: Push content down so it clears the fixed navbar */
+    margin-top: 8rem;
+    
     animation: fadeIn 0.5s ease-in-out;
 }
 
@@ -451,9 +463,13 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
 
 /* --- PROJECT DATABASE STYLES --- */
 .projects-container {
-    padding: 120px 20px 50px;
+    padding: 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    
+    /* FIX: Push content down so it clears the fixed navbar */
+    margin-top: 8rem;
+    
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -733,6 +749,9 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
     .container {
         padding: 1rem;
         max-width: 95%; /* Use more screen space */
+        
+        /* Ensure proper spacing on tablets too */
+        margin-top: 8rem;
     }
     
     .schematics-grid {
@@ -775,6 +794,11 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
         margin-top: 20px !important; 
         padding-top: 0;
         min-height: auto; 
+    }
+    
+    /* Reset home page margins for mobile */
+    .container {
+        margin-top: 0;
     }
 
     .profile-header {
