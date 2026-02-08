@@ -35,12 +35,27 @@ body {
     background-size: 40px 40px; z-index: -1; pointer-events: none;
 }
 
-/* --- NAVIGATION BAR --- */
+/* --- NAVIGATION BAR (OPTION 2: GLASS HUD) --- */
 .nav-bar {
-    position: fixed; top: 0; width: 100%; padding: 20px; z-index: 1000;
-    display: flex; justify-content: center; gap: 30px;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+    position: fixed; 
+    top: 0; 
+    width: 100%; 
+    padding: 15px 0; /* Slightly compact */
+    z-index: 1000;
+    display: flex; 
+    justify-content: center; 
+    gap: 40px;
+    
+    /* GLASS EFFECT */
+    background: rgba(5, 5, 5, 0.7); /* Semi-transparent dark */
+    backdrop-filter: blur(12px);     /* Blurs whatever is behind it */
+    -webkit-backdrop-filter: blur(12px); /* Safari support */
+    
+    /* Cyber Border at bottom */
+    border-bottom: 1px solid rgba(0, 243, 255, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
+
 .nav-link {
     color: var(--text-gray); text-decoration: none; font-family: 'Orbitron'; letter-spacing: 2px; font-size: 0.9rem;
     transition: 0.3s; padding: 5px 15px; border: 1px solid transparent;
@@ -192,6 +207,11 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
     color: #fff;
     text-decoration: none;
     transition: 0.3s;
+    
+    /* --- CLICKABLE BUTTON FIX --- */
+    position: relative; 
+    z-index: 100;       /* Forces it above background layers */
+    cursor: pointer;    /* Forces the "hand" icon */
 }
 
 .freq-node i { font-size: 2rem; margin-bottom: 0.5rem; color: #00f3ff; }
@@ -246,6 +266,99 @@ h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 700; b
     background: #00f3ff;
     color: #000;
     box-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
+}
+
+/* --- CYBER CHECKBOXES --- */
+.checkbox-row {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.cyber-checkbox {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: #8892b0;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.cyber-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox box */
+.checkmark {
+    position: absolute;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: rgba(0,0,0,0.5);
+    border: 1px solid #333;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+/* On mouse-over, add a grey background color */
+.cyber-checkbox:hover input ~ .checkmark {
+    border-color: #00f3ff;
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+/* When the checkbox is checked */
+.cyber-checkbox input:checked ~ .checkmark {
+    background-color: #00f3ff;
+    border-color: #00f3ff;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+}
+
+/* Create the checkmark indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.cyber-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark symbol */
+.cyber-checkbox .checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid #000; /* Black check on neon blue bg */
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.label-text {
+    transition: 0.3s;
+}
+
+.cyber-checkbox input:checked ~ .label-text {
+    color: #00f3ff;
+    text-shadow: 0 0 5px rgba(0, 243, 255, 0.5);
+}
+
+/* Mobile Checkbox Stack */
+@media (max-width: 600px) {
+    .checkbox-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
 }
 
 /* --- ACTION AREA & UPLINK BUTTON (FIXED) --- */
