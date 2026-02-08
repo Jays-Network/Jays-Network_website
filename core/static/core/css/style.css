@@ -64,6 +64,29 @@ body {
     color: var(--primary); border: 1px solid var(--primary); box-shadow: 0 0 15px rgba(0, 242, 255, 0.3); background: rgba(0, 242, 255, 0.1);
 }
 
+/* --- ACTIVE PAGE INDICATOR (GLOWING RING) --- */
+.nav-link.active {
+    color: #fff;
+    border: 1px solid var(--primary);
+    background: rgba(0, 242, 255, 0.15);
+    box-shadow: 0 0 15px var(--primary), inset 0 0 10px rgba(0, 242, 255, 0.2);
+    text-shadow: 0 0 5px var(--primary);
+    position: relative;
+}
+
+/* Optional: Add a small "Online" dot to the active link */
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
+}
+
 /* --- BOOT SCREEN --- */
 #boot-screen {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;

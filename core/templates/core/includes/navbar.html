@@ -1,11 +1,23 @@
+{% load static %}
+
 <nav class="nav-bar">
-    <a href="{% url 'index' %}" class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
-        COMMAND CENTER
+    <a href="{% url 'index' %}" 
+       class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+       COMMAND CENTER
     </a>
-    <a href="{% url 'projects' %}" class="nav-link {% if request.resolver_match.url_name == 'projects' %}active{% endif %}">
-        PROJECT DATABASE
+
+    <a href="{% url 'projects' %}" 
+       class="nav-link {% if request.resolver_match.url_name == 'projects' %}active{% endif %}">
+       PROJECT DATABASE
     </a>
-    <a href="{% url 'certifications' %}" class="nav-link">
-        CREDENTIALS
+
+    <a href="{% url 'certifications' %}" 
+       class="nav-link {% if request.resolver_match.url_name == 'certifications' %}active{% endif %}">
+       CREDENTIALS
+    </a>
+
+    <a href="{% url 'contact' %}" 
+       class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+       SECURE UPLINK
     </a>
 </nav>
