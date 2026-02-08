@@ -1,8 +1,10 @@
+import os
 import requests
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
+# --- TELEGRAM UPLINK FUNCTION ---
 def send_telegram_message(message):
     """
     Fetches credentials from settings (loaded from .env), cleans them,
@@ -16,7 +18,7 @@ def send_telegram_message(message):
         print("⚠️ ERROR: Telegram credentials missing in settings/.env")
         return
 
-    # 2. THE FIX: Remove invisible newlines/spaces that cause crashes
+    # 2. Clean tokens
     token = str(token).strip()
     chat_id = str(chat_id).strip()
 
@@ -28,51 +30,21 @@ def send_telegram_message(message):
     }
     
     try:
-        # 3. Add timeout (5s) and check for HTTP errors (like 401 Unauthorized)
+        # 3. Add timeout (5s)
         response = requests.post(url, json=payload, timeout=5)
         response.raise_for_status() 
     except Exception as e:
-        # 4. Crash Prevention: Log the error but keep the website running!
+        # 4. Crash Prevention
         print(f"❌ UPLINK FAILED: {e}")
 
-def index(request):
-    return render(request, 'core/index.html')
-
-def projects(request):
-    return render(request, 'core/projects.html')
-
-def certifications(request):
-    return render(request, 'core/certifications.html')
-
-def contact(request):
-    if request.method == 'POST':
-        # 1. Capture the form data from the HTML inputs
-        name = request.POST.get('operator_id')
-        subject = request.POST.get('subject')
-        msg_body = request.POST.get('message')
-
-        # 2. Format the message for the Cyberpunk look
-        formatted_message = (
-            f"🚨 *INCOMING TRANSMISSION* 🚨\n\n"
-            f"👤 *Operator:* `{name}`\n"
-            f"📂 *Subject:* `{subject}`\n"
-            f"📝 *Payload:* \n{msg_body}"
-        )
-
-        # 3. Fire the protected Uplink function
-        send_telegram_message(formatted_message)
-
-        # 4. Show success message on the website
-        messages.success(request, 'UPLINK SUCCESSFUL. TRANSMISSION SENT.')
-        return redirect('contact')
-
-    return render(request, 'core/contact.html')
-
-    from django.shortcuts import render
-import os # <--- Make sure you import os
+# --- VIEW FUNCTIONS ---
 
 def index(request):
-    # Get keys from .env
+    """
+    Main Dashboard View.
+    Passes Supabase credentials to the frontend for the Live Feed.
+    """
+    # Get keys from .env (via os.environ)
     supabase_url = os.environ.get('SUPABASE_URL')
     supabase_key = os.environ.get('SUPABASE_KEY')
 
@@ -82,4 +54,32 @@ def index(request):
     }
     return render(request, 'core/index.html', context)
 
-# ... keep your other views (projects, contact, certifications) as they are ...
+def projects(request):
+    return render(request, 'core/projects.html')
+
+def certifications(request):
+    return render(request, 'core/certifications.html')
+
+def contact(request):
+    if request.method == 'POST':
+        # 1. Capture the form data
+        name = request.POST.get('operator_id')
+        subject = request.POST.get('subject')
+        msg_body = request.POST.get('message')
+
+        # 2. Format the message
+        formatted_message = (
+            f"🚨 *INCOMING TRANSMISSION* 🚨\n\n"
+            f"👤 *Operator:* `{name}`\n"
+            f"📂 *Subject:* `{subject}`\n"
+            f"📝 *Payload:* \n{msg_body}"
+        )
+
+        # 3. Fire the Uplink
+        send_telegram_message(formatted_message)
+
+        # 4. Show success message
+        messages.success(request, 'UPLINK SUCCESSFUL. TRANSMISSION SENT.')
+        return redirect('contact')
+
+    return render(request, 'core/contact.html')
