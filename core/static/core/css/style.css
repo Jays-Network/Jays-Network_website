@@ -47,7 +47,7 @@ body {
     gap: 40px;
     
     /* GLASS EFFECT */
-    background: rgba(5, 5, 5, 0.7); /* Semi-transparent dark */
+    background: rgba(5, 5, 5, 0.95); /* Semi-transparent dark */
     backdrop-filter: blur(12px);     /* Blurs whatever is behind it */
     -webkit-backdrop-filter: blur(12px); /* Safari support */
     
