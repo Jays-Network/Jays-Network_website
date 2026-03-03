@@ -60,6 +60,9 @@ def projects(request):
 def certifications(request):
     return render(request, 'core/certifications.html')
 
+def privacy_policy(request):
+    return render(request, 'core/privacy.html')
+
 def contact(request):
     if request.method == 'POST':
         # 1. Capture the form data

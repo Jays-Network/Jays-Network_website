@@ -1,0 +1,219 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* Privacy Policy Specific Styles */
+    .policy-section { margin-bottom: 3rem; }
+    .policy-section h3 {
+        font-family: 'Orbitron', sans-serif;
+        color: #00f3ff;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+        padding-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .policy-section p {
+        color: #8892b0;
+        line-height: 1.8;
+        margin-bottom: 1.2rem;
+        font-size: 1rem;
+    }
+    .policy-section ul {
+        list-style: none;
+        padding-left: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .policy-section li {
+        color: #8892b0;
+        margin-bottom: 0.8rem;
+        position: relative;
+        line-height: 1.6;
+    }
+    .policy-section li::before {
+        content: '>>';
+        color: #33ff00;
+        position: absolute;
+        left: -2rem;
+        font-family: 'Fira Code', monospace;
+    }
+    .policy-highlight { color: #fff; font-weight: 600; text-shadow: 0 0 5px rgba(255,255,255,0.3); }
+    .policy-card {
+        background: rgba(0, 243, 255, 0.05);
+        border-left: 3px solid #00f3ff;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+    }
+</style>
+
+<div class="projects-container">
+    
+    <div class="terminal-header-large">
+        <div class="glitch-text" style="font-size: 3rem;">PRIVACY_POLICY</div>
+        <div class="sub-text">>> LEGAL_FRAMEWORK // DATA_PROTECTION_PROTOCOLS</div>
+        <div style="color: #33ff00; font-size: 0.8rem; font-family: 'Fira Code'; margin-top: 15px;">
+            EFFECTIVE: MAR 03 2026 | LAST_UPDATED: MAR 03 2026
+        </div>
+    </div>
+
+    <div class="terminal-window" style="max-width: 100%; padding: 3rem;">
+        
+        <div class="terminal-header" style="margin: -3rem -3rem 3rem -3rem; padding: 15px 30px; border-bottom: 1px solid #00f3ff; background: rgba(0,0,0,0.5);">
+            <div class="status-dot blink" style="background-color: #33ff00; box-shadow: 0 0 10px #33ff00;"></div>
+            <h2 style="font-family: 'Fira Code'; font-size: 0.9rem; color: #00f3ff; margin: 0;">SECURE_DOCUMENT // SYS_POLICY.TXT</h2>
+        </div>
+
+        <div class="policy-section">
+            <h3>01 // Who We Are</h3>
+            <p>Jay's Network operates digital products including the <span class="policy-highlight">Nexus Coms</span> secure communication platform and associated websites. When this policy refers to "we", "us", or "our", it means Jay's Network and its products.</p>
+            <p>Our website is <a href="https://jays-network.com" style="color: #00f3ff; text-decoration: none;">jays-network.com</a>. For questions about this policy, contact us at the details listed at the bottom of this page.</p>
+        </div>
+
+        <div class="policy-section">
+            <h3>02 // Information We Collect</h3>
+            <p>We collect only what is necessary to provide and improve our services. This includes:</p>
+            <ul>
+                <li><span class="policy-highlight">Account Information</span> — name, email address, username, and encrypted password when you create an account.</li>
+                <li><span class="policy-highlight">Communications Data</span> — messages, group conversations, and call logs within the Nexus Coms platform.</li>
+                <li><span class="policy-highlight">Location Data</span> — GPS coordinates when you actively enable live location sharing or emergency alerts (never collected passively without consent).</li>
+                <li><span class="policy-highlight">Device Information</span> — device type, operating system, push notification token, and app version for notification delivery and diagnostics.</li>
+                <li><span class="policy-highlight">Usage Data</span> — app interactions, feature usage, and crash reports to improve performance.</li>
+                <li><span class="policy-highlight">Profile Data</span> — profile photo and display preferences you choose to provide.</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h3>03 // How We Use Your Information</h3>
+            <p>Your information is used solely to operate and improve our services:</p>
+            <ul>
+                <li>Deliver real-time messaging, group communication, and emergency alerts.</li>
+                <li>Authenticate your identity and maintain secure sessions.</li>
+                <li>Send push notifications for messages, alerts, and important updates.</li>
+                <li>Share your location with authorised group members when you explicitly activate location sharing.</li>
+                <li>Diagnose crashes and technical issues to improve app stability.</li>
+                <li>Respond to support requests and account queries.</li>
+            </ul>
+            <div class="policy-card">
+                <p style="margin: 0; color: #fff; font-family: 'Fira Code', monospace; font-size: 0.9rem;">
+                    <span style="color: #33ff00;">>> SECURE_PROMISE:</span> We do not sell your data. We do not share your personal information with advertisers, data brokers, or any third party for marketing purposes.
+                </p>
+            </div>
+        </div>
+
+        <div class="policy-section">
+            <h3>04 // Third-Party Services</h3>
+            <p>Our applications integrate with trusted third-party providers to deliver core functionality. Each provider operates under their own privacy policy:</p>
+            
+            <div class="frequency-grid" style="margin: 2rem 0;">
+                <div class="freq-node" style="cursor: default;">
+                    <i class="fas fa-database"></i>
+                    <span>SUPABASE</span>
+                    <p style="font-size: 0.6rem; color: #8892b0; margin-top: 5px; text-align: center;">Auth & Real-time DB</p>
+                </div>
+                <div class="freq-node" style="cursor: default;">
+                    <i class="fas fa-comments"></i>
+                    <span>COMETCHAT</span>
+                    <p style="font-size: 0.6rem; color: #8892b0; margin-top: 5px; text-align: center;">Messaging Engine</p>
+                </div>
+                <div class="freq-node" style="cursor: default;">
+                    <i class="fab fa-android"></i>
+                    <span>FIREBASE (FCM)</span>
+                    <p style="font-size: 0.6rem; color: #8892b0; margin-top: 5px; text-align: center;">Android Pushes</p>
+                </div>
+                <div class="freq-node" style="cursor: default;">
+                    <i class="fab fa-apple"></i>
+                    <span>APPLE APNS</span>
+                    <p style="font-size: 0.6rem; color: #8892b0; margin-top: 5px; text-align: center;">iOS Pushes</p>
+                </div>
+                <div class="freq-node" style="cursor: default;">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>EXPO / EAS</span>
+                    <p style="font-size: 0.6rem; color: #8892b0; margin-top: 5px; text-align: center;">App Builds</p>
+                </div>
+                <div class="freq-node" style="cursor: default;">
+                    <i class="fas fa-server"></i>
+                    <span>REPLIT</span>
+                    <p style="font-size: 0.6rem; color: #8892b0; margin-top: 5px; text-align: center;">API Hosting</p>
+                </div>
+            </div>
+            
+            <p>We select providers that meet high standards for data security and privacy. We do not grant these providers permission to use your data for their own commercial purposes.</p>
+        </div>
+
+        <div class="policy-section">
+            <h3>05 // Location Data</h3>
+            <p>Location access is entirely optional and user-initiated. We access your location only when:</p>
+            <ul>
+                <li>You activate the Live Location Sharing feature within a group.</li>
+                <li>You trigger or receive an Emergency Alert that requires location context.</li>
+                <li>You grant background location permission for active monitoring sessions.</li>
+            </ul>
+            <p>Location data is shared only with members of the specific group you have chosen to share it with. It is not stored permanently — live location data is overwritten on each update and deleted when the sharing session ends.</p>
+        </div>
+
+        <div class="policy-section">
+            <h3>06 // Data Storage & Security</h3>
+            <p>Your data is stored on secure infrastructure operated by Supabase, with the following protections in place:</p>
+            <ul>
+                <li>Passwords are hashed using bcrypt — we never store plaintext passwords.</li>
+                <li>All data is transmitted over encrypted HTTPS and WSS connections.</li>
+                <li>Authentication tokens expire after 7 days and are stored securely on your device.</li>
+                <li>Row Level Security (RLS) policies ensure users can only access data they are authorised to see.</li>
+                <li>Security headers (HSTS, CSP, X-Frame-Options) are enforced on all API endpoints.</li>
+                <li>Rate limiting is applied to authentication endpoints to prevent brute force attacks.</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h3>07 // Data Retention</h3>
+            <p>We retain your data for as long as your account is active. If you request account deletion:</p>
+            <ul>
+                <li>Your profile and account data will be deleted within 30 days.</li>
+                <li>Message history may be retained in anonymised form for up to 90 days before permanent deletion.</li>
+                <li>Live location data is deleted immediately when a sharing session ends.</li>
+                <li>Device push tokens are removed upon logout or account deletion.</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h3>08 // Your Rights</h3>
+            <p>Depending on your location, you may have rights including:</p>
+            <ul>
+                <li>The right to access the personal data we hold about you.</li>
+                <li>The right to correct inaccurate or incomplete data.</li>
+                <li>The right to request deletion of your account and associated data.</li>
+                <li>The right to withdraw consent for location tracking at any time.</li>
+                <li>The right to data portability.</li>
+                <li>The right to lodge a complaint with your local data protection authority.</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h3>09 // Children's Privacy</h3>
+            <p>Our services are not directed at children under the age of 13. We do not knowingly collect personal information from anyone under 13. If you believe a child has provided us with personal information, please contact us immediately and we will delete it.</p>
+        </div>
+
+        <div class="policy-section">
+            <h3>10 // Cookies & Tracking</h3>
+            <p>Our websites may use minimal cookies for session management and security. We do not use advertising cookies, tracking pixels, or behavioural analytics tools. We do not participate in cross-site tracking.</p>
+        </div>
+
+        <div class="policy-section">
+            <h3>11 // Changes to This Policy</h3>
+            <p>We may update this policy from time to time. When we make material changes, we will update the "LAST_UPDATED" date at the top of this page. Continued use of our services after changes constitutes acceptance of the revised policy.</p>
+        </div>
+
+        <hr class="neon-divider" style="margin: 3rem 0;">
+
+        <div class="action-area" style="text-align: center;">
+            <p class="terminal-text">QUESTIONS OR DATA REQUESTS?</p>
+            <a href="mailto:privacy@jays-network.com" class="uplink-btn">
+                <span class="btn-text">CONTACT PRIVACY TEAM</span>
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
